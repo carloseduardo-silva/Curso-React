@@ -6,7 +6,7 @@ const ManageData = () => {
 
     const [number, setNumber] = useState(22)
 
-    console.log(number)
+   
   return (
     <div>
       <h1> Valor: {number}</h1>

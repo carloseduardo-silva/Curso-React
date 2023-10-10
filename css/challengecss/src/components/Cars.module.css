@@ -1,0 +1,19 @@
+
+
+.info{
+    color: black;
+    background-color: gold;
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1em;
+    width: 350px;
+}
+
+h1{
+    margin: 1em;
+}
+
+p{
+    padding-bottom:3px;
+    
+}

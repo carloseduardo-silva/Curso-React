@@ -13,6 +13,7 @@ import Container from './Container'
 import ExecuteFunction from './ExecuteFunction'
 import Message from './Message'
 import ChangeMessageState from './ChangeMessageState'
+import ChallengeFour from './ChallengeFour'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,12 @@ function App() {
   ]
 
   const [message, setMessage] = useState()
+
+  const people = [
+    {id:1, name:"Carlos Eduardo", age:'19', profession:'Developer'},
+    {id:2, name:"Julio César", age:'28', profession:'Trader'},
+    {id:3, name:"Renata Cabral", age:'16', profession:'VIP Person'},
+    {id:4, name:"Julia Ribeiro", age:'17', profession:'Waitress'},]
 
   const handleMessage = (msg) =>{
     setMessage(msg)
@@ -73,6 +80,15 @@ function App() {
       <Message msg={message}/>
 
       <ChangeMessageState handleMessage={handleMessage}/>
+
+      {people.map(person =>(
+        <ChallengeFour 
+        key={person.key}
+        name={person.name}
+        age={person.age}
+        job={person.profession}
+        />
+        ))}
 
 
 
