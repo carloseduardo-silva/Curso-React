@@ -1,0 +1,33 @@
+html, body{
+  height: 100%;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+}
+
+body{
+  background-image: url('/public/fundo-azul5.png');
+  color: white;
+  
+}
+
+button{
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 12px 1em;
+  font-weight: bolder;
+  font-size: 22px;
+  background-color:rgb(54, 98, 243) ;
+  color: white;
+  margin: 2em;
+}
+
+ button:hover{
+  transform: scale(1.1);
+  border: 2px solid gold;
+  background-color:rgb(38, 75, 198) ;
+  transition: 400ms;
+}
+
+
+
+
