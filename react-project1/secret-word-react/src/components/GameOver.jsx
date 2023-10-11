@@ -1,8 +1,14 @@
 import "./GameOver.css"
 
-const GameOver = () => {
+const GameOver = ({startScreen, score}) => {
   return (
-    <div>
+    <div className="gameover">
+
+      <h2> Fim de jogo!</h2>
+
+      <p> A sua pontuação foi: <span className="bold">{score}</span>  </p>
+
+      <button onClick={startScreen}>REINICIAR</button>
       
     </div>
   )

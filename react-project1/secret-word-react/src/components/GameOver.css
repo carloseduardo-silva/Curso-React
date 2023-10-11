@@ -1,0 +1,14 @@
+.gameover h2{
+    font-size: 4.2em;
+    margin: 1em 10px 60px 10px;
+
+}
+
+.gameover p{
+    font-size: 20px;
+    
+}
+
+.gameover button{
+    font-size: 1.9em;
+}

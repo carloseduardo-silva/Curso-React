@@ -22,6 +22,7 @@ const stages = [
 
 
 
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -29,15 +30,120 @@ function App() {
 
   const [words] = useState(wordsList)
 
-  console.log(words)
+  const [pickedWord, setPickedWord] = useState("")
+  const [pickedCategory, setPickedCategory] = useState("")
+  const [letters, setLetters] = useState([])
 
+
+  const[score, setScore] = useState(0)
+  const[tries, setTries] = useState(3)
+  const[guessesLetters, setGuessesLetters] = useState([])
+  const[wrongLetters, setWrongLetters] = useState([])
+
+
+  const randomCategoryandWord = () =>{
+
+    var categories = Object.keys(wordsList)
+    var category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
+
+    var wordList = words[category]
+
+    var word = wordList[Math.floor(Math.random() * Object.keys(wordList).length)]
+
+
+    return [category, word]
+  }
+
+  const resetStates = () =>{
+  
+    setGuessesLetters([])
+    setWrongLetters([])
+    setScore(0)
+    setTries(3)
+
+
+  }
+
+
+  const startScreen = () =>{
+
+    resetStates()
+    setGameStage(stages[0].name)
+  
+  }
+  
+  const startGame = () =>{
+
+    //pick a random category + word
+    const [category, word]= randomCategoryandWord()
+    console.log(category, word)
+   
+
+    //create an array of letters from word
+    var wordLetters = word.split('')
+    wordLetters = wordLetters.map((i) => i.toLowerCase())
+    console.log(wordLetters)
+
+    //fill states
+
+    setPickedCategory(category)
+    setPickedWord(word)
+    setLetters(wordLetters)
+  
+
+
+    //starts the game page
+    setGameStage(stages[1].name)
+  }
+
+
+  const verifyLetter = (letter) =>{
+    
+    const normalizedLetter = letter.toLowerCase()
+
+    //case the input has a Letter that have already played.
+    if(guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter) ){
+      window.alert('Esta letra ja foi utilizada!')
+      return
+    }
+    //case the input has a right letter
+    else if(letters.includes(normalizedLetter)){
+      setGuessesLetters((actualGuessLetters) =>  [
+        ...actualGuessLetters,
+        normalizedLetter
+      ])
+      
+      
+} 
+//case of the user passed away the 3 tries
+    else if(letter ==='end'){
+      setGameStage(stages[2].name)
+
+    }
+    
+    //case the input has a wrong letter
+    else{
+      setTries(parseInt(tries)-1)
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
+        normalizedLetter
+      ])
+
+    }
+
+  
+  }
+
+ 
+
+  
   return (<>
 
-  {gamestage == stages[0].name && <StartScreen setGameStage={setGameStage} />}
+  {gamestage == stages[0].name && <StartScreen startGame={startGame} />}
 
-  {gamestage == stages[1].name && <GameScreen/>}
+  {gamestage == stages[1].name && <GameScreen verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessesLetters={guessesLetters} wrongLetters={wrongLetters} tries={tries} score={score}   />}
 
-  {gamestage == stages[2].name && <GameOver/>}
+  {gamestage == stages[2].name && <GameOver startScreen={startScreen} score={score}    />}
      
     
     

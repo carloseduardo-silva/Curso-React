@@ -1,0 +1,81 @@
+.bold{
+    font-weight: bolder;
+}
+
+.gold{
+    color: gold;
+    font-weight: bolder;
+}
+
+.h3{
+    font-weight: bolder;
+}
+
+p{
+    font-size:15px;
+    margin: 10px;
+}
+
+h1{
+    font-size: 3.45em;
+    margin: 0.6em;
+
+}
+
+h3{
+    font-size: 1.55em;
+    margin: 5px 5px 2.5px 5px;
+}
+
+.gold-border{
+    border: 5px solid gold;
+    border-radius: 10px;
+    margin: 1.5em;
+}
+.gold-border:hover{
+    border: 5px solid rgb(0, 78, 167); 
+    transition: 450ms;
+}
+
+
+.card-box{
+    padding: 2em;
+}
+
+.card{
+    height: 114px;
+    max-width: 100px;
+    padding: 15px;
+    border: 3px solid black;
+    font-size: 4em;
+    text-align: center;
+    font-weight: bold
+}
+
+.card:hover{
+    border-color: gold;
+    cursor: pointer;
+    transition: 270ms;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.input-box input{
+    width: 55px;
+    height: 45px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold
+}
+
+.input-box button{
+    margin: 1.05em;
+}
