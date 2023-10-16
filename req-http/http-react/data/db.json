@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Camisa",
+      "price": 59.9
+    },
+    {
+      "id": 2,
+      "name": "Calça vermelha",
+      "price": 90
+    },
+    {
+      "id": 3,
+      "name": "Boné aba reta",
+      "price": 29.9
+    },
+    {
+      "name": "capa de chuva",
+      "price": "16",
+      "id": 4
+    },
+    {
+      "name": "bag gugu",
+      "price": "1000",
+      "id": 5
+    },
+    {
+      "name": "Jaco Pallace",
+      "price": "1256",
+      "id": 6
+    },
+    {
+      "name": "Cadeira Gamer",
+      "price": "250",
+      "id": 7
+    },
+    {
+      "name": "Bmw i8",
+      "price": "200000",
+      "id": 8
+    }
+  ]
+}
