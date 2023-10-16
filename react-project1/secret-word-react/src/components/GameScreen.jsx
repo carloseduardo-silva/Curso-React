@@ -1,12 +1,14 @@
 import { useState, useRef } from 'react'
 import './GameScreen.css'
 
-const GameScreen = ({verifyLetter, pickedWord, pickedCategory, letters, wrongLetters, guessesLetters, tries, score,}) => {
+const GameScreen = ({verifyLetter, pickedWord, pickedCategory, letters, wrongLetters, guessesLetters, tries, score, reset}) => {
   
 const [letter, setLetter] = useState('')
 
 
 const letterInputRef = useRef('')
+
+var uniqueLetters = new Set(letters)
 
 const handleSubmit = (e) =>{
     e.preventDefault()
@@ -19,6 +21,10 @@ const handleSubmit = (e) =>{
         verifyLetter(letter)
         setLetter('')
         letterInputRef.current.focus()
+        
+
+    
+
       }
     }
 

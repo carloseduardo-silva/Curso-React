@@ -40,19 +40,20 @@ function App() {
   const[guessesLetters, setGuessesLetters] = useState([])
   const[wrongLetters, setWrongLetters] = useState([])
 
+ 
 
-  const randomCategoryandWord = () =>{
+  const randomCategoryandWord = useCallback(() =>{
 
-    var categories = Object.keys(wordsList)
-    var category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
+    const categories = Object.keys(wordsList)
+    const category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
 
-    var wordList = words[category]
+    const wordList = words[category]
 
-    var word = wordList[Math.floor(Math.random() * Object.keys(wordList).length)]
+    const word = wordList[Math.floor(Math.random() * Object.keys(wordList).length)]
 
 
     return [category, word]
-  }
+  },[words])
 
   const resetStates = () =>{
   
@@ -71,9 +72,15 @@ function App() {
     setGameStage(stages[0].name)
   
   }
-  
-  const startGame = () =>{
 
+
+ 
+  
+  const startGame = useCallback(() =>{
+    //clear all letters when games restart
+    clearLettersStates()
+
+  
     //pick a random category + word
     const [category, word]= randomCategoryandWord()
     console.log(category, word)
@@ -93,7 +100,17 @@ function App() {
 
 
     //starts the game page
+    
     setGameStage(stages[1].name)
+    
+  }, [randomCategoryandWord])
+
+  const clearLettersStates = () =>{
+    console.log('limpou')
+    setGuessesLetters([])
+    setWrongLetters([])
+    console.log(guessesLetters)
+  
   }
 
 
@@ -112,6 +129,7 @@ function App() {
         ...actualGuessLetters,
         normalizedLetter
       ])
+      
       
       
 } 
@@ -134,6 +152,29 @@ function App() {
   
   }
 
+  
+
+  useEffect( () =>{
+
+    const uniqueLetters = [... new Set(letters)]
+
+    //win condition
+
+    if(uniqueLetters.length === guessesLetters.length){
+
+      // add score 
+      console.log(guessesLetters)
+      setScore((actualScore) => actualScore += 100)
+
+      //reset
+      
+      startGame()
+
+    }
+
+}, [guessesLetters, letters, startGame])
+
+
  
 
   
@@ -141,7 +182,7 @@ function App() {
 
   {gamestage == stages[0].name && <StartScreen startGame={startGame} />}
 
-  {gamestage == stages[1].name && <GameScreen verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessesLetters={guessesLetters} wrongLetters={wrongLetters} tries={tries} score={score}   />}
+  {gamestage == stages[1].name && <GameScreen verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessesLetters={guessesLetters} wrongLetters={wrongLetters} tries={tries} score={score} reset={clearLettersStates}  />}
 
   {gamestage == stages[2].name && <GameOver startScreen={startScreen} score={score}    />}
      
