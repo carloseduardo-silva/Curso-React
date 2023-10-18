@@ -1,0 +1,26 @@
+nav{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu-nav{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5em;
+    margin-top: 0.75em;
+}
+
+a{
+    display: flex;
+    margin: 0.5em 2em;
+}
+
+h3:hover{
+    color: white;
+    transition: 250ms;
+    transform: scale(1.05);
+}
