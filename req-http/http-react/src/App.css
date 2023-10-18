@@ -5,8 +5,8 @@
   text-align: center;
 }
 
-.add-product{
-
+ul li{
+  margin: 1em 10px;
 }
 
 form{
@@ -20,4 +20,9 @@ form{
 form input {
   padding: 8px;
   margin: 15px;
+}
+
+.exclude-btn{
+  font-size: 12px;
+  margin-left: 10px;
 }

@@ -1,0 +1,19 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+
+
+
+
+.active{
+  background-color: rgba(58, 58, 58, 0.844);
+  transition: 250ms;
+  padding: 9px 10px 13px 10px;
+  border-radius: 5px;
+}

@@ -1,0 +1,27 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(208, 0, 208);
+   
+}
+
+a:hover{
+    transform: scale(1.1);
+    color: blueviolet;
+    transition: 250ms;
+}
+
+nav ul li{
+    margin: 1em;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    flex-direction:row;
+}

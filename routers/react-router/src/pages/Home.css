@@ -1,0 +1,29 @@
+*{
+    text-align: center;
+}
+
+.products{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    list-style: none;
+}
+
+
+.products-li {
+    border:1px solid white;
+    margin:1em;
+    padding: 3px;
+}
+
+.products-li:hover{
+    transform: scale(1.1);
+    border:1px solid blueviolet;
+    cursor:pointer;
+    transition: 275ms;
+}
+
+.info:hover{
+    color: white;
+}

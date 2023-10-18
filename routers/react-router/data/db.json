@@ -1,0 +1,29 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Boné aba reta",
+        "price": 29.9
+      },
+      {
+        "name": "capa de chuva",
+        "price": "16",
+        "id": 2
+      },
+      {
+        "name": "bag gugu",
+        "price": "1000",
+        "id": 3
+      },
+      {
+        "name": "Jaco Pallace",
+        "price": "1256",
+        "id": 4
+      },
+      {
+        "name": "Cadeira Gamer",
+        "price": "250",
+        "id": 5
+      }
+    ]
+  }
