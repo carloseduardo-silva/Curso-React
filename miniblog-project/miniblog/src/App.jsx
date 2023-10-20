@@ -11,6 +11,8 @@ import Footer from "./components/Footer"
 //pages
 import Home from './pages/home/Home'
 import About from './pages/about/About'
+import Login from './pages/login/Login'
+import Register from './pages/register/Register'
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Routes> 
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
+        <Route path="/login" element={ <Login/> }/>
+        <Route path="/register" element={ <Register/> }/>
 
         </Routes>
         </div>

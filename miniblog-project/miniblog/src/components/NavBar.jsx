@@ -15,6 +15,14 @@ const NavBar = () => {
           </li>
 
           <li>
+            <NavLink to={'/login'}> Entrar </NavLink>
+          </li>
+
+          <li>
+            <NavLink to={'/register'}> Cadastrar </NavLink>
+          </li>
+
+          <li>
             <NavLink to={'/about'}> About </NavLink>
           </li>
         </ul>
