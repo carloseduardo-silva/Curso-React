@@ -34,7 +34,7 @@ body {
   
   /* form styles */
   form {
-    max-width: 40%;
+    max-width: 60%;
     margin: 0 auto;
   }
   
@@ -123,5 +123,13 @@ body {
     border-radius: 5px;
     margin: 10px auto;
 
+  }
+
+  @media (min-width:1000px) {
+    form {
+      max-width: 40%;
+      margin: 0 auto;
+    }
+    
   }
 

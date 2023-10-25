@@ -12,6 +12,15 @@ const NavBar = () => {
 
   const { logout } = useAuthentication()
 
+  const confirmLogout = () =>{
+   if(window.confirm('Deseja realmente sair?')){
+      logout()
+   }else{
+    return;
+   }
+  }
+
+
   return (
 
     <div>
@@ -58,7 +67,7 @@ const NavBar = () => {
           </li>
 
             {user && (<li> 
-              <button className={styles.logout_btn} onClick={logout}> Sair </button>
+              <button className={styles.logout_btn} onClick={confirmLogout}> Sair </button>
               </li>)}
 
             
