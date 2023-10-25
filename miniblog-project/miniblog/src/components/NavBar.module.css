@@ -30,4 +30,8 @@
     padding: 0.4em 0.6em;
     text-decoration: none;
   }
+  
+  .logout_btn{
+    margin: 0;
+  }
  

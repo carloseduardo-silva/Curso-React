@@ -8,8 +8,8 @@ import{
 
 import {db} from "../firebase/config"
 
-
 import { useState, useEffect } from "react"
+
 
 
 export const useAuthentication = () =>{
@@ -18,7 +18,6 @@ export const useAuthentication = () =>{
     const[loading, setLoading] = useState(null)
     const[registered, setRegistered] = useState(false)
     
-
     //cleanup
     const [cancelled, setCancelled]= useState(false)
 
@@ -30,6 +29,7 @@ export const useAuthentication = () =>{
         }
     }
 
+    //register
     const createUser = async (data) =>{
         checkIfIsCancelled()
         setLoading(true)
@@ -60,6 +60,9 @@ export const useAuthentication = () =>{
             } else if(error.message.includes('email-already')){
                 systemErrorMessage = 'E-mail ja cadastrado!'
             }
+            else if(error.message.includes('invalid-email')){
+                systemErrorMessage = 'E-mail invalido!'
+            }
             else{
                 systemErrorMessage = "Ocorreu um erro, tente novamente mais tarde!"
             }
@@ -68,6 +71,45 @@ export const useAuthentication = () =>{
             
         }
         
+    }
+
+    //logout - signtout
+    const logout = () =>{
+        checkIfIsCancelled()
+        signOut(auth)
+
+    }
+
+    //login - signin
+    const login = async (data) =>{
+
+        checkIfIsCancelled()
+        setLoading(true)
+        setError(false)
+
+        try {
+
+            await signInWithEmailAndPassword(auth, data.email,
+                data.password)
+                setLoading(false)
+            
+        } catch (error) {
+
+            let systemErrorMessage
+
+            if(error.message.includes('invalid-login')){
+                systemErrorMessage = 'Usuario ou senha incorreto(s)'
+
+            } 
+            else{
+                systemErrorMessage = 'Ocorreu um erro, por favor tente mais tarde'
+            }
+            console.log(error)
+            setError(systemErrorMessage)
+            setLoading(false)
+            
+        }
+
     }
 
     useEffect(()=>{
@@ -81,6 +123,8 @@ export const useAuthentication = () =>{
         error, 
         loading,
         registered,
-        setRegistered
+        setRegistered,
+        logout,
+        login
     }
 }

@@ -9,6 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+
   const{createUser, error: authError, loading, registered, setRegistered} = useAuthentication()
 
   const[error, setError] = useState("")
@@ -33,18 +34,26 @@ const Register = () => {
     }
 
     const res = await createUser(user)
-    console.log(res)
-
-    setInterval(() =>{
-      setDisplayName('')
-      setEmail('')
-      setPassword('')
-      setConfirmPassword('')
-      setRegistered(false)
-    }, 3000)
-
+    console.log( error)
 
   }
+
+  
+    useEffect(()=>{
+        if (registered){
+          setTimeout(() =>{
+            setDisplayName('')
+            setEmail('')
+            setPassword('')
+            setConfirmPassword('')
+            setRegistered(false)
+            
+          }, 2300)}
+      }
+   ,[registered])
+  
+
+
 
   useEffect(()=>{
     if(authError){

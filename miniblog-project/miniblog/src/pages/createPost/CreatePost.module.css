@@ -1,0 +1,8 @@
+.createPost{
+    text-align: center;
+}
+
+.createPost form{
+    margin-top: 1.5em;
+    width: 100%;
+}

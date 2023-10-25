@@ -1,0 +1,23 @@
+.login{
+    text-align: center;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    margin-top: 2em;
+  }
+  
+  .login p {
+    color: #aaa;
+  }
+
+  .login form label{
+    margin: 1.15em 0em;
+  }
+
+  .login form button{
+    margin: 1.5em auto;
+  }
