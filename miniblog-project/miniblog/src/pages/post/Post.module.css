@@ -1,0 +1,46 @@
+.post_container {
+    text-align: center;
+    padding: 1em 0em;
+  }
+
+  .post_container h2 {
+    margin:1.2em;
+  }
+
+  .post_container img{
+    width: 80%;
+  }
+
+  
+  .post_container h3 {
+    margin:1.5em 0px 0.3em 0px;
+  }
+
+  .post_container p {
+    margin:1em;
+  }
+
+  .post_container .tags {
+    display: flex;
+    justify-content: center;
+  }
+
+  
+  .tags p {
+    margin-right: 1em;
+  }
+  
+  .tags span {
+    font-weight: bold;
+  }
+
+  @media (min-width:1000px) {
+    .post_container img{
+        width: 60%;
+      }
+      .post_container {
+        text-align: center;
+        padding: 2em 0em;
+      }
+    
+  }

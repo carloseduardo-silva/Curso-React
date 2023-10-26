@@ -2,23 +2,29 @@
 import styles from "./Home.module.css"
 //hooks
 import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import { useFetchDocument } from "../../hooks/useFetchDocuments"
+import { useNavigate, Link, Navigate } from "react-router-dom"
+import { useFetchDocuments } from "../../hooks/useFetchDocuments"
+
+//componentes
+import {PostDetail} from "../../components/PostDetail"
 
 import React from 'react'
 
 const Home = () => {
 
-  const [query, setQuery] = useState()
-  const {documents:posts, loading} = useFetchDocument('posts')
+  const [query, setQuery] = useState("")
+  const {documents:posts, loading} = useFetchDocuments('posts')
+  const Navigate = useNavigate()
   
-  
-    console.log(posts)
-
-
+   
   const handleSubmit = (e) =>{
 
     e.preventDefault()
+
+    if(query){
+      return Navigate(`/search?q=${query}`)
+    }
+
 
   }
 
@@ -27,15 +33,13 @@ const Home = () => {
 
         <h1>Veja os nossos posts mais recentes</h1>
         <form onSubmit={handleSubmit} className={styles.search_form}>
-          <input value={query} onChange={(e) =>{setQuery(e.target.value)}} type="text" placeholder="Busque por tags" />
+          <input required value={query} onChange={(e) =>{setQuery(e.target.value)}} type="text" placeholder="Busque por tags" />
           <button className="btn btn-dark"> Pesquisar</button>
         </form>
 
-        <div>
+        <div className={styles.posts_container}>
             {loading && (<p> Carregando ...</p>) }
-            {posts && posts.map((post) => 
-              <h3 key={post.uid}> {post.title} </h3>
-            )}
+            {posts && posts.map((post) => <PostDetail key={post.id} post={post}/>)}
 
             { posts && posts.length === 0 && (
               <div className={styles.noposts}>

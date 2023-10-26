@@ -3,14 +3,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 1em;
   }
+
+  .posts_container{
+    margin-top: 0.25em;
+  }
+  
   
   .search_form {
     max-width: 100%;
     width: 60%;
     display: flex;
     justify-content: center;
-    margin-bottom: 2em;
+    margin:0.75em 0em 1.85em 0em;
   }
   
   .search_form input {
