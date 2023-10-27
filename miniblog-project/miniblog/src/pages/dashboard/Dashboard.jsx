@@ -8,6 +8,8 @@ import styles from "./Dashboard.module.css"
 import { userAuthValue } from '../../context/Auth'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 
+import { useDeleteDocument } from '../../hooks/useDeleteDocument'
+
 
 const Dashboard = () => {
 
@@ -17,7 +19,17 @@ const Dashboard = () => {
   //posts from user
   const {documents: posts, loading} = useFetchDocuments('posts', null, uid)
 
-  console.log(posts)
+  //delete user
+  const { deleteDocument } = useDeleteDocument('posts')
+
+ 
+
+
+  if(loading){
+    return <p>Carregando...</p>
+  }
+
+  
 
   return (
     <div className={styles.dashboard}>
@@ -29,10 +41,33 @@ const Dashboard = () => {
         <Link to='/' className='btn'> Criar Primeiro Post </Link>
          </div>) :
 
-      (<div> Tem posts!</div>)}
+      (
+      <> 
+      <div className={styles.post_header}>
+        <span>Título</span>
+        <span>Ações</span>
+
+      </div>
+
+      
+      </> )}
 
       {posts && posts.map((post) =>( 
-        <h1> {post.title}</h1>
+        <div className={styles.post_row} key={post.id}>
+
+          <p> {post.title}</p>
+
+          <div>
+            <Link to={`/posts/${post.id}`} className='btn btn-outline'>Ver</Link>
+
+            <Link to={`/posts/edit/${post.id}`} className='btn btn-outline'>Editar</Link>
+
+            <button className='btn btn-outline btn-danger' onClick={() => deleteDocument(post.id)}>Excluir</button>
+          </div>
+
+
+
+        </div>
         ))}
 
     </div>

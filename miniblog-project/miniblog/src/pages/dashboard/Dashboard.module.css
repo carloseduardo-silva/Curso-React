@@ -43,11 +43,11 @@
     align-items: center;
     border-bottom: 1px solid #eee;
     width: 80%;
-    padding: 10px;
+    padding: 18px 10px;
   }
   
   .post_row p {
-    color: #000;
+    color: #6e6e6e;
   }
   
   .post_row button,
