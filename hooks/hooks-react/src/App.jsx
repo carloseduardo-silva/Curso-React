@@ -6,11 +6,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
-import HookUseState from './components/HookUseState'
-import HookUseReducer from './components/HookUseReducer'
-import HookUseEffect from './components/HookUseEffect'
-import { HookUseImperativeHandle } from './components/HookUseImperativeHandle'
-import HookCustom from './components/HookCustom'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,11 +29,7 @@ function App() {
     
     </Routes>
     </BrowserRouter>
-    <HookUseState/>
-    <HookUseReducer/>
-    <HookUseEffect/>
-    <HookUseImperativeHandle/> 
-    <HookCustom/> 
+  
     </>
   )
 }
