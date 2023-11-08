@@ -1,0 +1,47 @@
+.container_nav{
+    margin-bottom: 1em;
+}
+
+.container_nav nav{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: black;
+    align-items: center;
+    color: white;
+    padding: 0.60em;
+    font-size: 2.3em;
+
+
+}
+
+
+.container_nav span{
+    color: rgb(203, 201, 201);
+    margin-left: -6.5px;
+}
+
+.logo:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 250ms;
+
+}
+
+.container_icons{
+    display: flex;
+    align-items: center;
+}
+
+.container_icons span{
+    color: white;
+    margin: 2px 15px 0px 15px;
+    font-size: 1.05em;
+
+}
+
+.container_icons span:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 200ms;
+}
