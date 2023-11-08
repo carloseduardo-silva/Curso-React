@@ -1,11 +1,16 @@
 import { useState } from 'react'
-
 import {Routes, Route, BrowserRouter} from "react-router-dom"
 
+//styles
 import './App.css'
+
+//pages
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Product from './pages/Product/Product'
+
+//components
+import Footer from './components/Footer'
 
 
 
@@ -24,8 +29,8 @@ function App() {
     
     
     
-    
     </BrowserRouter>
+    <Footer/>
      
     </>
   )
