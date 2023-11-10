@@ -36,14 +36,15 @@ function App() {
 
   const loadingUser = user === undefined
 
-  
+  //verify the presence of a user signed up 
   useEffect(() =>{
     onAuthStateChanged(auth, (user)=>{
       setUser(user)
     })
   }, [auth]);
 
-
+  
+  //if dont have a user sign up/ state of loading between the requisitions
   if(loadingUser){
     return <p>Carregando...</p>
   }

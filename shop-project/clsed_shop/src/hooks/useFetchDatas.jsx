@@ -1,5 +1,5 @@
 import { db } from "../firebase/config"
-import {collection, query, orderBy, getDocs } from "firebase/firestore"
+import {collection, query, orderBy, getDocs, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 
 export const useFetchDatas = (docCollection, search=null) =>{
@@ -27,10 +27,12 @@ export const useFetchDatas = (docCollection, search=null) =>{
                 let docsArr = []
 
                 if (search) {
+
+                    //q = await query(collection(db, 'products'), where("name", "includes", search))
                     
                 } 
                 else{
-                     q = query(collection(db, 'products'), orderBy('idProduct'))
+                     q = await query(collection(db, 'products'), orderBy('idProduct'))
                 }
 
                 const querySnapshot = await getDocs(q);

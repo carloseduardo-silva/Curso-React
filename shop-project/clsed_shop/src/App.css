@@ -2,3 +2,12 @@
     padding: 0px;
     margin:0px;
 }
+
+.error{
+    text-align: center;
+    color: red;
+    background-color: rgba(247, 154, 154, 0.43);
+    padding: 0.6em;
+    border-radius: 8px;
+    margin: 5px 10px;
+}

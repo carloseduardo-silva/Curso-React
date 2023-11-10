@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    background-color: black;
+    background-color: rgb(24, 24, 24);
     align-items: center;
     color: white;
     padding: 0.60em;
@@ -34,12 +34,34 @@
 .container_icons{
     display: flex;
     align-items: center;
+    
+}
+
+.container_icons form{
+    display: flex;
+    align-items: center;
+}
+
+.container_icons button{
+    color: white;
+    margin: 2px 15px 0px 15px;
+    font-size: 1em;
+    background-color: transparent;
+    border: none;
+ 
+
+}
+
+.container_icons button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 200ms;
 }
 
 .container_icons span{
     color: white;
     margin: 2px 15px 0px 15px;
-    font-size: 1.05em;
+    font-size: 1em;
 
 }
 
@@ -49,6 +71,33 @@
     transition: 200ms;
 }
 
+
+input.query{
+    background-color: rgba(0, 0, 0, 0.704);
+    border-radius: 8px;
+    color: rgb(217, 217, 217);
+    border: grey;
+    width: 50vw;
+    padding: 0.52em 16px;
+    font-size: 0.5em;
+    margin: 2px;
+    max-width: 400px;
+
+}
+
+input.query::placeholder{
+    color: rgb(151, 151, 151);
+    font-size: 1em;
+}
+
 a{
     display: flex;
+}
+
+@media (min-width: 768px) {
+ 
+}
+
+@media (max-width: 660px) {
+   
 }

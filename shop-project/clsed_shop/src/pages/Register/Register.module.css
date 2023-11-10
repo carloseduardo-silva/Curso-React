@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    height: 81vh;
-   padding-bottom: 4em;
+    justify-content: start;
+    height: 90vh;
+    margin-top: 2em;
+    padding-bottom: 4em;
     
     
 }
@@ -18,7 +19,7 @@
 
 .form_container input{
     display: block;
-    padding: 1.55em 1.75em 1.55em 13px;
+    padding: 1.3em 1.6em 1.3em 13px;
     margin: 10px;
     border-radius: 5px;
     font-size: 1em;
@@ -52,7 +53,18 @@
 }
 
 h1{
-    font-size:3em
+    font-size:3em;
+    margin-bottom: 15px;
+}
+
+.registered{
+    text-align: center;
+    color: rgb(0, 205, 0);
+    background-color:  rgba(122, 234, 122, 0.357);
+    padding: 0.6em;
+    border-radius: 8px;
+    margin: 5px 10px;
+
 }
 
 
