@@ -28,11 +28,11 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
                 if (search) {
 
-                    //q = await query(collection(db, 'products'), where("name", "includes", search))
+                    q =  query(collection(db, 'products'), where("queryName", "array-contains", search))
                     
                 } 
                 else{
-                     q = await query(collection(db, 'products'), orderBy('idProduct'))
+                     q =  query(collection(db, 'products'), orderBy('idProduct'))
                 }
 
                 const querySnapshot = await getDocs(q);

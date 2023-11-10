@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import styles from "./Nav.module.css"
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { userAuthValue } from '../context/Auth'
@@ -9,7 +9,12 @@ import { useAuthentication } from '../hooks/useAuthentication'
 const Nav = () => {
 
   const[inputShow, setinputShow] = useState(false)
+  const[navMobileShow, setnavMobileShow] = useState(false)
+  const[navShopShow, setnavShopShow] = useState(false)
   const [productQuery, setProductQuery] = useState(null)
+
+
+
   const Navigate = useNavigate()
 
 
@@ -35,14 +40,30 @@ const Nav = () => {
      
   }
 
+  
+
+  const toggleModal = () =>{
+      if(navMobileShow){
+        setnavMobileShow(false)
+      } else{
+        setnavMobileShow(true)
+      }
+  }
+
+  const toggleShopModal = () =>{
+    if(navShopShow){
+      setnavShopShow(false)
+    } else{
+      setnavShopShow(true)
+    }
+}
+
   return (
     <div className={styles.container_nav}>
-        <nav>
-            {!inputShow &&   <Link to={'/'}>
+        <nav className={styles.desktop_nav}>
+              <Link to={'/'}>
               <div style={{color:'white'}} className={styles.logo}>CL <span>SED</span></div>
-            </Link>}
-
-         
+            </Link>
 
             <div className={styles.container_icons}>
 
@@ -51,30 +72,52 @@ const Nav = () => {
 
 
 
-            {(!inputShow && user) && <Link><span onClick={() => {setinputShow(true)}} className="material-symbols-outlined">search</span></Link>}
+            {(!inputShow && user) && <Link><span onClick={() => {setinputShow(true)}} className="material-symbols-outlined search">search</span></Link>}
 
             {(inputShow && user) && <>
            <form onSubmit={handleQuery}>
              
                <input onChange={(e) =>{setProductQuery(e.target.value)}} placeholder='O que voce esta procurando?' className={styles.query} type='text'/>
-             <button type='submit' className="material-symbols-outlined">search</button>
+             <button type='submit' className="material-symbols-outlined search">search</button>
            </form>
       
             </>
             }
-
+            
+            
 
             {user && <> 
+            
+             
+              <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">shopping_cart</span></Link>
               
-              <Link><span className="material-symbols-outlined">shopping_cart</span></Link>
+              <Link><span onClick={() =>(toggleModal())}  className="material-symbols-outlined menu-hamburguer">menu</span></Link>
 
-              <Link><span onClick={() => confirmLogout()} className="material-symbols-outlined">logout</span></Link>
+              <Link><span onClick={() => confirmLogout()} className="material-symbols-outlined logout">logout</span></Link>
             </> }
 
            
 
             </div>
         </nav>
+
+      {navMobileShow && 
+        <nav  className={styles.mobile_nav}>
+
+        <h1>navMobile</h1>
+        <Link><span onClick={() =>(toggleModal())} className="material-symbols-outlined shops">close</span></Link>
+
+        </nav>
+        }
+
+          {navShopShow && 
+            <nav  className={styles.mobile_nav}>
+
+            <h1>Shop</h1>
+            <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">close</span></Link>
+
+            </nav>
+            }
       
     </div>
   )

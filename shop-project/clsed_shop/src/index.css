@@ -7,3 +7,20 @@
 
 }
 
+@media (min-width: 825px) {
+  .menu-hamburguer{
+    display: none;
+  }
+}
+
+@media (max-width: 825px) {
+  .logout, .search, .query{
+  display: none;
+ }
+
+}
+
+
+ 
+
+
