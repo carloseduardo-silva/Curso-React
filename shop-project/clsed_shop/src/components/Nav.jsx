@@ -1,8 +1,16 @@
-import {useState, useRef} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import styles from "./Nav.module.css"
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+
+//context
 import { userAuthValue } from '../context/Auth'
+
+//hooks
 import { useAuthentication } from '../hooks/useAuthentication'
+import { useGetLocalStorage } from '../hooks/useGetLocalStorage'
+import { useExcludeLocalStorage } from '../hooks/useExcludeLocalStorage'
+import { useTotalValueShop }  from '../hooks/useTotalValueShop'
+
 
 
 
@@ -11,7 +19,8 @@ const Nav = () => {
   const[inputShow, setinputShow] = useState(false)
   const[navMobileShow, setnavMobileShow] = useState(false)
   const[navShopShow, setnavShopShow] = useState(false)
-  const [productQuery, setProductQuery] = useState(null)
+  const[productQuery, setProductQuery] = useState(null)
+  const[shopDatas, setShopDatas] = useState([])
 
 
 
@@ -20,7 +29,15 @@ const Nav = () => {
 
   const {user} = userAuthValue()
   const {logout} = useAuthentication()
+  //get the datas from localstorage, to show in shoppingCart
+  const { datas } = useGetLocalStorage()
 
+  const {totalValue} = useTotalValueShop(datas)
+
+ 
+ 
+
+  //signOut
   const confirmLogout = () =>{
     if(window.confirm('Deseja realmente sair?')){
       logout()
@@ -29,19 +46,19 @@ const Nav = () => {
       return}
   }
 
+  //query products
   const handleQuery = (e) =>{
     e.preventDefault()
     if(productQuery){
-      console.log(productQuery)
-     return Navigate(`/search?q=${productQuery}`)
+      
+     return Navigate(`/search?q=${productQuery.toLowerCase()}`)
     }else{
       setinputShow(false)
     }
      
   }
 
-  
-
+  //sidebar modal
   const toggleModal = () =>{
       if(navMobileShow){
         setnavMobileShow(false)
@@ -57,6 +74,27 @@ const Nav = () => {
       setnavShopShow(true)
     }
 }
+
+const excludeProduct = (data) =>{
+  
+ if( useExcludeLocalStorage(data.key)){
+  window.location.reload()
+ }
+}
+
+useEffect(() =>{
+ 
+  if( datas.length == 0 ) {
+    console.log('nao há items adicionados ao carrinho')
+  }
+  else{
+    console.log(datas)
+    setShopDatas(datas)
+    
+    
+  }
+
+},[])
 
   return (
     <div className={styles.container_nav}>
@@ -113,8 +151,46 @@ const Nav = () => {
           {navShopShow && 
             <nav  className={styles.mobile_nav}>
 
-            <h1>Shop</h1>
-            <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">close</span></Link>
+            <div className={styles.shop_header}>
+              <h2>Carrinho</h2>
+              <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">close</span></Link>
+            </div>
+
+
+            <div className={styles.shop_itens}>
+              {shopDatas && shopDatas.map((data) =>( 
+                
+                <div key={JSON.parse(data).key} className={styles.shop_card}>
+
+                  <div className={styles.shop_cardMain}>
+                    <div className={styles.card_image}><img src={JSON.parse(data).URLimage} alt="product" /></div>
+                    <div className={styles.card_info}>
+                      <h4> {JSON.parse(data).name} </h4>
+                      <p>R${JSON.parse(data).price}.00  </p>
+                      <p>Tamanho: { JSON.parse(data).size}</p>
+                    </div>
+                  </div>
+
+                  <div className={styles.shop_cardBtn}>
+                    <input value={JSON.parse(data).amount}  type="number" name="amount" id="amount" />
+                    <a onClick={() =>{excludeProduct(JSON.parse(data))}} > Retirar </a>
+                  </div>
+
+                  
+                  
+                </div>
+               ))}
+            </div>
+
+            <div className={styles.shop_summary}>
+              {(datas.length == 0) ?<p>Não há items adicionados ao carrinho!</p> :
+              <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina</p>
+              <Link><button> Compre Já</button></Link>
+ </>
+               
+              }
+            </div>
+            
 
             </nav>
             }

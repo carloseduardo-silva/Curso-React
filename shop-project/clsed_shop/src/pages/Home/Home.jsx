@@ -17,7 +17,7 @@ import { useFetchDatas } from '../../hooks/useFetchDatas'
 const Home = () => {
 
     const {datas, loading, error} = useFetchDatas('products')
-    datas.map((data) => (console.log(data)))
+    
 
   return (
     <>

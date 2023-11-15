@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom"
 import { onAuthStateChanged } from 'firebase/auth'
+
+
+//context
+
 import { AuthContextProvider } from './context/Auth'
 
 //styles
@@ -16,12 +20,18 @@ import Search from './pages/Search/Search'
 //components
 import Footer from './components/Footer'
 import { auth } from './firebase/config'
+import { useCounterValue } from './hooks/useCounterValue'
+
 
 
 
 
 function App() {
   const [user, setUser]  = useState()
+ 
+
+
+  
 
   const loadingUser = user === undefined
 
@@ -41,21 +51,23 @@ function App() {
   return (
     <>
     <AuthContextProvider value={{user}}>
-      <BrowserRouter>
+     
+        <BrowserRouter>
 
-        <Routes>
-            <Route path='/' element={<Home/>}></Route>
-            <Route path='/login' element={!user ? <Login/> : <Navigate to={'/'} /> }></Route>
-            <Route path='/products/:id' element={user ? <Product/> : <Navigate to={'/login'} /> }></Route>
-            <Route path='/search' element={user ? <Search/> : <Navigate to={'/login'} /> }></Route>
-            <Route path='/register' element={!user ? <Register/> : <Navigate to={'/'} /> }></Route>
-            
-        </Routes>
+          <Routes>
+              <Route path='/' element={<Home/>}></Route>
+              <Route path='/login' element={!user ? <Login/> : <Navigate to={'/'} /> }></Route>
+              <Route path='/products/:id' element={user ? <Product/> : <Navigate to={'/login'} /> }></Route>
+              <Route path='/search' element={user ? <Search/> : <Navigate to={'/login'} /> }></Route>
+              <Route path='/register' element={!user ? <Register/> : <Navigate to={'/'} /> }></Route>
+              
+          </Routes>
+          
         
+        
+        </BrowserRouter>
+        <Footer/>
       
-      
-      </BrowserRouter>
-      <Footer/>
     </AuthContextProvider>
     
     </>
