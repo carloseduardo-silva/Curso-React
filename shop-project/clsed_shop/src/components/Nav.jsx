@@ -86,12 +86,8 @@ useEffect(() =>{
  
   if( datas.length == 0 ) {
     console.log('nao há items adicionados ao carrinho')
-  }
-  else{
-    console.log(datas)
+  }else{
     setShopDatas(datas)
-    
-    
   }
 
 },[])
@@ -185,7 +181,7 @@ useEffect(() =>{
             <div className={styles.shop_summary}>
               {(datas.length == 0) ?<p>Não há items adicionados ao carrinho!</p> :
               <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina</p>
-              <Link><button> Compre Já</button></Link>
+              <Link to={'/cart'}><button> Compre Já</button></Link>
  </>
                
               }

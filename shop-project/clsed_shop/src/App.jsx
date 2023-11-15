@@ -16,11 +16,13 @@ import Login from './pages/Login/Login'
 import Product from './pages/Product/Product'
 import Register from './pages/Register/Register'
 import Search from './pages/Search/Search'
+import Cart from './pages/Cart/Cart'
 
 //components
 import Footer from './components/Footer'
 import { auth } from './firebase/config'
-import { useCounterValue } from './hooks/useCounterValue'
+
+
 
 
 
@@ -56,10 +58,12 @@ function App() {
 
           <Routes>
               <Route path='/' element={<Home/>}></Route>
+              <Route path='/register' element={!user ? <Register/> : <Navigate to={'/'} /> }></Route>
               <Route path='/login' element={!user ? <Login/> : <Navigate to={'/'} /> }></Route>
               <Route path='/products/:id' element={user ? <Product/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/search' element={user ? <Search/> : <Navigate to={'/login'} /> }></Route>
-              <Route path='/register' element={!user ? <Register/> : <Navigate to={'/'} /> }></Route>
+              <Route path='/cart' element={user ? <Cart/> : <Navigate to={'/login'} /> }></Route>
+             
               
           </Routes>
           

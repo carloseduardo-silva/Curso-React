@@ -13,6 +13,8 @@ import { useGetLocalStorage } from '../../hooks/useGetLocalStorage'
 //components
 import Nav from '../../components/Nav'
 import { useCounterValue } from '../../hooks/useCounterValue'
+import { useValidateAddShop } from '../../hooks/useValidateAddShop'
+import { useSumAmount } from '../../hooks/useSumAmount'
 
 
 
@@ -26,19 +28,20 @@ const Product = () => {
 
 
  
-
+    //get idProduct from URL
     const { id } = useParams()
 
+    //fetch data from DB
     const {data, loading, error:fetchError} = useFetchData('products', null, id)
 
+    //get datas already saved in localStorage
     const {datas} = useGetLocalStorage()
 
+    //return the last key saved on localStorage
     const {counterValue} = useCounterValue(datas)
   
 
   
-  
-
     const handleProduct = (e) =>{
       e.preventDefault()
       
@@ -55,53 +58,71 @@ const Product = () => {
       }
     }
 
+    //add product in shoppingCart
     function addShop(){
+
+      var counter;
+
+      //first product in the shoppingCart
+      if(datas.length == 0){
+        counter = datas.length+1
+      } 
+      //another one product in the shoppingCart
+      else{
+      counter = counterValue+1
+      }
+
+      const shopDatas = {
+        name: data.name,
+        price: data.price,
+        id: data.idProduct,
+        URLimage: data.URLimage,
+        key: counter,
+        size,
+        amount: Number.parseInt(amount)
+      }
+
 
       if(!size){
         setValidateError('Por favor selecione o tamanho.')
       
       } else if(!amount){
         setValidateError('Por favor selecione a quantidade.')
-
-      }
-      else{
       
-        setValidateError(null)
+      //same product with the same size has already been added to the shoopingCart  
+      } else if(useValidateAddShop(shopDatas, datas)){
+        
+        let {infoObj} = useSumAmount(shopDatas, datas)
+        
+        let newAmount = Number.parseInt(infoObj.lastAmount) + Number.parseInt(amount)
 
-        var counter;
-        //first product in the shoppingCart
-        if(datas.length == 0){
-          counter = datas.length+1
-          console.log('datas.length')
-          
-          //another one product in the shoppingCart
-        } else{
-          console.log('counter value')
-          counter = counterValue+1
-          
-        }
-
-        const shopDatas = {
+        const newShopDatas = {
           name: data.name,
           price: data.price,
           id: data.idProduct,
           URLimage: data.URLimage,
-          key: counter,
+          key: infoObj.key,
           size,
-          amount,
+          amount: newAmount
         }
 
+        console.log(newShopDatas)
 
+        if (useToLocalStorage(newShopDatas, infoObj.key)){
+          window.location.reload()
+        }
+        
+
+
+      }
+
+      //first time adding the current product
+      else{
+        setValidateError(null)
         //pass object with the datas of the products to the localstorage
        if(useToLocalStorage(shopDatas, counter)){
         window.location.reload()
-     
-        
-       }
-      }
-
-      
-    }
+       }}}
    
 
   return (

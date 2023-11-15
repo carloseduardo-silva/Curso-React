@@ -2,7 +2,6 @@
  export const useToLocalStorage = (shopDatas, counter) =>{
       
 
-    
     localStorage.setItem(`${counter}`, JSON.stringify(shopDatas))
    
     
