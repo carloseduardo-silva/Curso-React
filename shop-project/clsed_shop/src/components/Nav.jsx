@@ -10,6 +10,9 @@ import { useAuthentication } from '../hooks/useAuthentication'
 import { useGetLocalStorage } from '../hooks/useGetLocalStorage'
 import { useExcludeLocalStorage } from '../hooks/useExcludeLocalStorage'
 import { useTotalValueShop }  from '../hooks/useTotalValueShop'
+import { useAddItem } from '../hooks/useAddItem'
+import { useRemoveItem } from '../hooks/useRemoveItem'
+import { useToLocalStorage } from '../hooks/useToLocalStorage'
 
 
 
@@ -50,6 +53,7 @@ const Nav = () => {
   const handleQuery = (e) =>{
     e.preventDefault()
     if(productQuery){
+    
       
      return Navigate(`/search?q=${productQuery.toLowerCase()}`)
     }else{
@@ -82,6 +86,35 @@ const excludeProduct = (data) =>{
  }
 }
 
+
+const addItem = (data) =>{
+  let newAmount = data.amount + 1
+  
+  const {productData} = useAddItem(data, newAmount)
+  
+  useToLocalStorage(productData, productData.key)
+  window.location.reload()
+ 
+}
+
+const removeItem = (data) =>{
+
+  if(data.amount == 1){
+      return
+  }
+  else{
+      let newAmount = data.amount - 1
+  
+      const {productData} = useRemoveItem(data, newAmount)
+      
+      useToLocalStorage(productData, productData.key)
+      window.location.reload()
+     
+  }
+
+}
+
+
 useEffect(() =>{
  
   if( datas.length == 0 ) {
@@ -94,8 +127,27 @@ useEffect(() =>{
 
   return (
     <div className={styles.container_nav}>
+    {/*  DeskTop Nav */}
         <nav className={styles.desktop_nav}>
-              <Link to={'/'}>
+
+              {user && 
+              <Link class='menu-hamburguer'><span style={{color:'white', fontSize:'1em' }} onClick={() =>(toggleModal())}  className="material-symbols-outlined menu-hamburguer">menu</span></Link>
+              }
+            
+            <div className={styles.utilities}>
+              
+              <div className={styles.utilities_card}>
+                <p> Loja Online </p> <span class="material-symbols-outlined expand">expand_more</span>
+              </div>
+
+              <div className={styles.utilities_card}>
+                <p> Ajuda </p> 
+              </div>
+
+            </div>
+
+
+            <Link to={'/'}>
               <div style={{color:'white'}} className={styles.logo}>CL <span>SED</span></div>
             </Link>
 
@@ -110,7 +162,6 @@ useEffect(() =>{
 
             {(inputShow && user) && <>
            <form onSubmit={handleQuery}>
-             
                <input onChange={(e) =>{setProductQuery(e.target.value)}} placeholder='O que voce esta procurando?' className={styles.query} type='text'/>
              <button type='submit' className="material-symbols-outlined search">search</button>
            </form>
@@ -119,13 +170,12 @@ useEffect(() =>{
             }
             
             
-
             {user && <> 
             
              
               <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">shopping_cart</span></Link>
               
-              <Link><span onClick={() =>(toggleModal())}  className="material-symbols-outlined menu-hamburguer">menu</span></Link>
+              
 
               <Link><span onClick={() => confirmLogout()} className="material-symbols-outlined logout">logout</span></Link>
             </> }
@@ -135,61 +185,93 @@ useEffect(() =>{
             </div>
         </nav>
 
+      {/* Mobile Menu-Hamburguer */}
       {navMobileShow && 
         <nav  className={styles.mobile_nav}>
 
-        <h1>navMobile</h1>
-        <Link><span onClick={() =>(toggleModal())} className="material-symbols-outlined shops">close</span></Link>
+        <div className={styles.navMobile_header}>
+        <form onSubmit={handleQuery}>
+               <input onChange={(e) =>{setProductQuery(e.target.value)}} placeholder='Pesquisa' className={styles.mobileQuery} type='text'/>
+
+             <button type='submit' className="material-symbols-outlined ">search</button>
+        </form>
+          
+          <Link><span onClick={() =>(toggleModal())} className="material-symbols-outlined shops">close</span></Link>
+        </div>
+
+        <div className={styles.navMobile_info}>
+
+          <div className={styles.navMobile_card}>
+            <p> Loja Online </p> <span> > </span>
+          </div>
+
+          <div className={styles.navMobile_card}>
+            <p> Lojas Físicas </p> 
+          </div>
+
+          <div className={styles.navMobile_card}>
+            <p> Ajuda </p> <span> > </span>
+          </div>
+          
+        </div>
 
         </nav>
-        }
+      }
 
-          {navShopShow && 
-            <nav  className={styles.mobile_nav}>
+      {/* shoppingCart Nav */}
+      {navShopShow && 
+        <nav  className={styles.mobile_navShop}>
 
-            <div className={styles.shop_header}>
-              <h2>Carrinho</h2>
-              <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">close</span></Link>
-            </div>
+        <div className={styles.shop_header}>
+          <h2>Carrinho</h2>
+          <Link><span onClick={() =>(toggleShopModal())} className="material-symbols-outlined shops">close</span></Link>
+        </div>
 
 
-            <div className={styles.shop_itens}>
-              {shopDatas && shopDatas.map((data) =>( 
-                
-                <div key={JSON.parse(data).key} className={styles.shop_card}>
-
-                  <div className={styles.shop_cardMain}>
-                    <div className={styles.card_image}><img src={JSON.parse(data).URLimage} alt="product" /></div>
-                    <div className={styles.card_info}>
-                      <h4> {JSON.parse(data).name} </h4>
-                      <p>R${JSON.parse(data).price}.00  </p>
-                      <p>Tamanho: { JSON.parse(data).size}</p>
-                    </div>
-                  </div>
-
-                  <div className={styles.shop_cardBtn}>
-                    <input value={JSON.parse(data).amount}  type="number" name="amount" id="amount" />
-                    <a onClick={() =>{excludeProduct(JSON.parse(data))}} > Retirar </a>
-                  </div>
-
-                  
-                  
-                </div>
-               ))}
-            </div>
-
-            <div className={styles.shop_summary}>
-              {(datas.length == 0) ?<p>Não há items adicionados ao carrinho!</p> :
-              <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina</p>
-              <Link to={'/cart'}><button> Compre Já</button></Link>
- </>
-               
-              }
-            </div>
+        <div className={styles.shop_itens}>
+          {shopDatas && shopDatas.map((data) =>( 
             
+            <div key={JSON.parse(data).key} className={styles.shop_card}>
 
-            </nav>
-            }
+              <div className={styles.shop_cardMain}>
+                <div className={styles.card_image}><img src={JSON.parse(data).URLimage} alt="product" /></div>
+                <div className={styles.card_info}>
+                  <h4> {JSON.parse(data).name} </h4>
+                  <p>R${JSON.parse(data).price}.00  </p>
+                  <p>Tamanho: { JSON.parse(data).size}</p>
+                </div>
+              </div>
+
+              <div className={styles.shop_cardBtn}>
+
+              <div class="quantity">    
+                        <button  style={{width:'31px'}}  onClick={() => removeItem(JSON.parse(data))}>-</button>
+                        <input style={{width:'24px'}} value={JSON.parse(data).amount}  class="quantity" id="quantity" min="0" name="quantity"  type="number"/>
+                        <button  style={{width:'31px'}}  onClick={() => addItem(JSON.parse(data))}>+</button>
+                    </div>
+
+                <a onClick={() =>{excludeProduct(JSON.parse(data))}} > Retirar </a>
+
+              </div>
+
+              
+              
+            </div>
+            ))}
+        </div>
+
+        <div className={styles.shop_summary}>
+          {(datas.length == 0) ?<p>Não há items adicionados ao carrinho!</p> :
+          <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina</p>
+          <Link to={'/cart'}><button> Compre Já</button></Link>
+</>
+            
+          }
+        </div>
+        
+
+        </nav>
+      }
       
     </div>
   )

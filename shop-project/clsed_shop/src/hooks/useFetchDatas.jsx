@@ -38,6 +38,7 @@ export const useFetchDatas = (docCollection, search=null) =>{
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     
+                 
                     docsArr.push(doc.data())
                     
                     setDatas(docsArr)
@@ -47,7 +48,7 @@ export const useFetchDatas = (docCollection, search=null) =>{
                 
 
             } catch (error) {
-                console.log(error)
+                console.log(error.message)
                 setError(error.message)
 
                 setLoading(false)

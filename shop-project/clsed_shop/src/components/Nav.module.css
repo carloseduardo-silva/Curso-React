@@ -15,10 +15,16 @@
 
 }
 
+.utilities{
+   display: none;
+}
 
-.container_nav span{
+
+
+.logo span{
     color: rgb(203, 201, 201);
     margin-left: -6.5px;
+    
 }
 .logo{
     margin-left: 0.5em;
@@ -71,21 +77,25 @@
     transition: 200ms;
 }
 
-
 input.query{
+    display: none;
+}
+
+
+input.mobileQuery{
     background-color: rgba(0, 0, 0, 0.704);
     border-radius: 8px;
     color: rgb(217, 217, 217);
     border: grey;
-    width: 50vw;
-    padding: 0.52em 16px;
-    font-size: 0.5em;
+    width: 30vw;
+    padding: 1.55em 16px;
+    font-size: 0.75em;
     margin: 2px;
     max-width: 400px;
 
 }
 
-input.query::placeholder{
+input.mobileQuery::placeholder{
     color: rgb(151, 151, 151);
     font-size: 1em;
 }
@@ -94,6 +104,8 @@ a{
     display: flex;
 }
 
+
+
 .mobile_nav{
     display: flex;
     background-color: rgb(24, 24, 24);
@@ -101,7 +113,73 @@ a{
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    padding: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    animation: fade 1s;
+    position: fixed;
+    top: 50%;
+    left: 25%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    height: 100vh;
+    width: 50%;
+}
+
+.navMobile_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 1.5em 1em;
+
+}
+
+.navMobile_header form{
+    display: flex;
+    align-items: center;
+}
+
+.navMobile_header button{
+    background-color: transparent;
+    color: rgb(156, 156, 156);
+    border: none;
+    display: inline-flex;
+    margin-left: -1.5em;
+}
+
+.navMobile_header span{
+    font-size: 2em;
+}
+
+.navMobile_info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.7px solid rgb(154, 154, 154);
+    width: 90%;
+    
+}
+
+.navMobile_card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1em 0em;
+}
+
+.mobile_navShop{
+    display: flex;
+    background-color: rgb(24, 24, 24);
+    color: white;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding-right: 10px;
     animation: fade 1s;
     position: fixed;
     top: 50%;
@@ -112,6 +190,7 @@ a{
     height: 100vh;
     width: 50%;
 }
+
 
 .shop_header{
     display: flex;
@@ -174,7 +253,7 @@ a{
 .shop_cardBtn input{
     width: 84px;
     text-align: center;
-    margin-left: 5px;
+    
 }
 
 .shop_cardBtn a{
@@ -240,20 +319,33 @@ a{
 
 
 
-@media (max-width: 390px) {
+@media (max-width: 550px) {
+
+
+   
+
+    .navMobile_header{
+        flex-direction: column-reverse;
+        gap: 1.2em;
+       
+    }
+    .navMobile_header span{
+        margin-left: 10px;
+    }
+
     .container_icons button {
-        font-size: 0.7em;
+        font-size: 0.9em;
     }
 
     .container_icons  span {
-        font-size: 0.7em;
+        font-size: 0.9em;
     }
 
     input.query{
-        width: 50vw;
-        padding: 0.6em 13px;
-        font-size: 0.32em;
-        margin: 4px 2px 2px 2px;
+        width: 38vw;
+        padding: 1.3em 16px;
+        font-size: 0.85em;
+        margin: 2px;
         max-width: 400px;
     
     }
@@ -261,10 +353,70 @@ a{
 
    }
 
-   @media (min-width:835px) {
+   @media (min-width:825px) {
+
+    .utilities{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .utilities_card{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        
+    
+    }
+    .utilities_card:hover{
+        cursor: pointer;
+    }
+    
+    .utilities_card p {
+        font-size: 16px;
+    }
+
+    .utilities_card:hover{
+        color: rgb(168, 168, 168);
+        transition: 250ms;
+    }
+
     .mobile_nav{
         width: 30%;
         left: 85%;
     }
+
+    .mobile_navShop{
+        width: 30%;
+        left: 85%;
+    }
+
+    
+    input.query{
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.704);
+        border-radius: 8px;
+        color: rgb(217, 217, 217);
+        border: grey;
+        width: 50vw;
+        padding: 0.52em 16px;
+        font-size: 0.5em;
+        margin: 2px;
+        max-width: 400px;
+    
+    }
+    
+    input.query::placeholder{
+        color: rgb(151, 151, 151);
+        font-size: 1em;
+    }
+
+    .mobile_nav{
+        display: none;
+    }
+
     
    }
