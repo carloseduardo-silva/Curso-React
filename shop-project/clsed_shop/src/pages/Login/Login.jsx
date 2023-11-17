@@ -30,10 +30,12 @@ const Login = () => {
     }
 
     const res = await login(user)
-    console.log(res)
+    setError(authError)
+    
 
   }
 
+ 
 
   return (
     <>
@@ -51,7 +53,7 @@ const Login = () => {
 
         <button type='submit'>Entrar</button>
         <Link to={'/register'}> <span> Criar Conta</span></Link>
-        {error && <p className='error'></p>}
+        {error && <p className='error'>{error}</p>}
       </form>
 
 

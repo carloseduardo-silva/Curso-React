@@ -13,6 +13,7 @@ import { useTotalValueShop }  from '../hooks/useTotalValueShop'
 import { useAddItem } from '../hooks/useAddItem'
 import { useRemoveItem } from '../hooks/useRemoveItem'
 import { useToLocalStorage } from '../hooks/useToLocalStorage'
+import { useFetchDatas } from '../hooks/useFetchDatas'
 
 
 
@@ -22,6 +23,8 @@ const Nav = () => {
   const[inputShow, setinputShow] = useState(false)
   const[navMobileShow, setnavMobileShow] = useState(false)
   const[navShopShow, setnavShopShow] = useState(false)
+  const[utilitiesModalShow, setUtilitiesModalShow] = useState(false)
+  const[utilitiesNavShow, setUtilitiesNavShow] = useState(false)
   const[productQuery, setProductQuery] = useState(null)
   const[shopDatas, setShopDatas] = useState([])
 
@@ -32,9 +35,10 @@ const Nav = () => {
 
   const {user} = userAuthValue()
   const {logout} = useAuthentication()
+
   //get the datas from localstorage, to show in shoppingCart
   const { datas } = useGetLocalStorage()
-
+  //sum the price of the products that the clients selected
   const {totalValue} = useTotalValueShop(datas)
 
  
@@ -54,7 +58,7 @@ const Nav = () => {
     e.preventDefault()
     if(productQuery){
     
-      
+     
      return Navigate(`/search?q=${productQuery.toLowerCase()}`)
     }else{
       setinputShow(false)
@@ -71,12 +75,29 @@ const Nav = () => {
       }
   }
 
+  //shoppingCart modal
   const toggleShopModal = () =>{
     if(navShopShow){
       setnavShopShow(false)
     } else{
       setnavShopShow(true)
     }
+}
+//utilities desktop modal
+const toggleUtilitiesModal = () =>{
+  if(utilitiesModalShow){
+    setUtilitiesModalShow(false)
+  } else{
+    setUtilitiesModalShow(true)
+  }
+}
+//utilitites mobile nav
+const toggleUtilitiesNavMobile = () =>{
+  if(utilitiesNavShow){
+    setUtilitiesNavShow(false)
+  } else{
+    setUtilitiesNavShow(true)
+  }
 }
 
 const excludeProduct = (data) =>{
@@ -86,7 +107,7 @@ const excludeProduct = (data) =>{
  }
 }
 
-
+//add item of a product
 const addItem = (data) =>{
   let newAmount = data.amount + 1
   
@@ -97,6 +118,7 @@ const addItem = (data) =>{
  
 }
 
+//remove item of a product
 const removeItem = (data) =>{
 
   if(data.amount == 1){
@@ -127,7 +149,7 @@ useEffect(() =>{
 
   return (
     <div className={styles.container_nav}>
-    {/*  DeskTop Nav */}
+        {/*  DeskTop Nav */}
         <nav className={styles.desktop_nav}>
 
               {user && 
@@ -136,7 +158,7 @@ useEffect(() =>{
             
             <div className={styles.utilities}>
               
-              <div className={styles.utilities_card}>
+              <div onClick={() => toggleUtilitiesModal()} className={styles.utilities_card}>
                 <p> Loja Online </p> <span class="material-symbols-outlined expand">expand_more</span>
               </div>
 
@@ -153,10 +175,11 @@ useEffect(() =>{
 
             <div className={styles.container_icons}>
 
+
+
+
             {/* no user authenticated */}
-            {!user &&   <Link to={'/login'}><span className="material-symbols-outlined">account_circle</span></Link> }
-
-
+            {!user &&   <Link to={'/login'}><span className="material-symbols-outlined login">account_circle</span></Link> }
 
             {(!inputShow && user) && <Link><span onClick={() => {setinputShow(true)}} className="material-symbols-outlined search">search</span></Link>}
 
@@ -185,6 +208,19 @@ useEffect(() =>{
             </div>
         </nav>
 
+        {/*  Utilities DeskTop Modal */}
+        {utilitiesModalShow && 
+        <nav className={styles.utilities_modal}>
+          <ul>
+            <Link><li>Todas as Roupas</li></Link>
+            <Link><li>Camisetas</li></Link>
+            <Link><li>Casacos e Jaquetas</li></Link>
+            <Link><li>Calças e Shorts</li></Link>
+            <Link><li>Acessórios</li></Link>
+          </ul>
+          </nav>}
+
+
       {/* Mobile Menu-Hamburguer */}
       {navMobileShow && 
         <nav  className={styles.mobile_nav}>
@@ -199,10 +235,10 @@ useEffect(() =>{
           <Link><span onClick={() =>(toggleModal())} className="material-symbols-outlined shops">close</span></Link>
         </div>
 
-        <div className={styles.navMobile_info}>
+        {!utilitiesNavShow && <div className={styles.navMobile_info}>
 
-          <div className={styles.navMobile_card}>
-            <p> Loja Online </p> <span> > </span>
+          <div onClick={() => toggleUtilitiesNavMobile()} className={styles.navMobile_card}>
+            <p> Loja Online </p> <span>{`>`}</span>
           </div>
 
           <div className={styles.navMobile_card}>
@@ -210,13 +246,33 @@ useEffect(() =>{
           </div>
 
           <div className={styles.navMobile_card}>
-            <p> Ajuda </p> <span> > </span>
+            <p> Ajuda </p> <span> {`>`} </span>
           </div>
           
-        </div>
+        </div>}
+
+        {utilitiesNavShow && 
+
+
+        <div className={styles.utilities_Nav}>
+
+          <div onClick={() => toggleUtilitiesNavMobile()} className={styles.navMobile_card}>
+            <p> Loja Online </p> <span>{`<`}</span>
+         </div>
+
+          <ul>
+            <Link><li>Todas as Roupas</li></Link>
+            <Link><li>Camisetas</li></Link>
+            <Link><li>Casacos e Jaquetas</li></Link>
+            <Link><li>Calças e Shorts</li></Link>
+            <Link><li>Acessórios</li></Link>
+          </ul>
+          </div>
+          }
 
         </nav>
       }
+
 
       {/* shoppingCart Nav */}
       {navShopShow && 

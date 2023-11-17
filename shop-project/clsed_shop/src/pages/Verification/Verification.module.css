@@ -1,0 +1,7 @@
+.verification_container{
+    display: flex;
+    background-color: rgb(26, 26, 26);
+    justify-content: center;
+    flex-direction: row;
+    height: 100vh;
+}

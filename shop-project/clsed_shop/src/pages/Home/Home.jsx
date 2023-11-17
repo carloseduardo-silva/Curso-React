@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { Link } from "react-router-dom"
 
 //css
@@ -16,7 +16,11 @@ import { useFetchDatas } from '../../hooks/useFetchDatas'
 
 const Home = () => {
 
-    const {datas, loading, error} = useFetchDatas('products')
+    const {datas, loading, error, loadData} = useFetchDatas('products')
+    
+    useEffect(() => {
+        loadData()
+    })
     
 
   return (

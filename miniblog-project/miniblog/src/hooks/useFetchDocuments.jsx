@@ -38,18 +38,18 @@ export const useFetchDocuments = (docCollection, search=null, uid=null) =>{
                 //case of the dashboard quering all posts from this user
                 else if(uid){
 
-                    q = await query(collectionRef, where("uid", "==", uid), orderBy("createAdt", "desc"))
+                    q =  query(collectionRef, where("uid", "==", uid), orderBy("createAdt", "desc"))
 
                 }
 
                 //normal assync post exibition
                 else{
-                    q=  await query(collectionRef, orderBy("createAdt", "desc"));
+                    q=   query(collectionRef, orderBy("createAdt", "desc"));
 
                 }
 
                 //snapshort observer assync
-                await onSnapshot(q, (querySnapshot) => {
+                onSnapshot(q, (querySnapshot) => {
                     setDocuments(
                       querySnapshot.docs.map((doc) => ({
                         id: doc.id,

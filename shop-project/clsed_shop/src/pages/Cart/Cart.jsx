@@ -38,9 +38,13 @@ useEffect(() =>{
   
   },[])
 
-  const refreshShop = () =>{
-    //refresh the shoppingCart if the client add/exclude some product in this screen
-  }
+  //exclude product
+  const excludeProduct = (data) =>{
+  
+    if( useExcludeLocalStorage(data.key)){
+     window.location.reload()
+    }
+   }
 
   //add a item from a product
   const addItem = (data) =>{
@@ -123,22 +127,51 @@ useEffect(() =>{
 
             </div>
 
-        <div className={styles.cart_subtotal}>
-                <p> Subtotal: R${totalValue},00</p>
-                <span> CLSEDCLUB (-R$ DESCONTO)</span>
-                <p style={{fontSize:'28px', fontWeight:'500'}}>R$ {totalValue},00</p>
+            <div className={styles.cart_subtotal}>
+                    <p> Subtotal: R${totalValue},00</p>
+                    <span> CLSEDCLUB (-R$ DESCONTO)</span>
+                    <p style={{fontSize:'28px', fontWeight:'500'}}>R$ {totalValue},00</p>
 
-                <p style={{fontSize:'14px', color:' rgb(90, 90, 90)', margin:'0px'}}> Taxas e frete calculados na próxima página.
-                </p>
+                    <p style={{fontSize:'14px', color:' rgb(90, 90, 90)', margin:'0px'}}> Taxas e frete calculados na próxima página.
+                    </p>
 
-                <div className={styles.subtotal_btn}>
-                    <button onClick={() => {refreshShop()}} className={styles.btn_update}> Atualizar</button>
-                    <Link to={'/verification'}><button className={styles.btn_shop}> Verificação de Compra</button></Link>
-                </div>
-                
+                    <div className={styles.subtotal_btn}>
+                        <button onClick={() => {refreshShop()}} className={styles.btn_update}> Atualizar</button>
+                        <Link to={'/verification'}><button className={styles.btn_shop}> Verificação de Compra</button></Link>
+                    </div>
+                    
 
             </div>
         </div>
+        
+        <div className={styles.paymentInfo_container}>
+
+              <div className={styles.paymentInfo_card}>
+                <h3>Formas de pagamento 💳</h3>
+                <p>Até 12x no cartão de credito ou a vista via PIX </p>
+              </div>
+
+              <div className={styles.paymentInfo_card}>
+                <h3>Site 100% seguro 🔒</h3>
+                <p>Pagamentos e dados segurados pela empresa PagarMe </p>
+              </div>
+
+              <div className={styles.paymentInfo_card}>
+                <h3>Frete Grátis ✈️</h3>
+                <p>Para todo Brasil nas compras acima de R$349,00 </p>
+              </div>
+
+              <div className={styles.paymentInfo_card}>
+                <h3>Troca Fácil 🔄</h3>
+                <p>Precisou trocar? Sem problemas! </p>
+
+                <p>Nossa equipe de atendimento te auxiliará em todo processo de troca sem nenhum custo</p>
+                
+              </div>
+
+        </div>
+
+
 
         
     </div>

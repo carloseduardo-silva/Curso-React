@@ -19,7 +19,9 @@
    display: none;
 }
 
-
+.utilities_modal{
+    display: none;
+}
 
 .logo span{
     color: rgb(203, 201, 201);
@@ -115,15 +117,15 @@ a{
     flex-direction: column;
     padding-right: 10px;
     padding-top: 10px;
-    animation: fade 1s;
+    animation: slideFromLeft 500ms;
     position: fixed;
     top: 50%;
-    left: 25%;
+    left: 30%;
     z-index: 5;
     transform: translate(-50%, -50%);
     text-align: center;
     height: 100vh;
-    width: 50%;
+    width: 60%;
 }
 
 .navMobile_header{
@@ -134,6 +136,10 @@ a{
     width: 90%;
     margin: 1.5em 1em;
 
+}
+
+.navMobile_header span{
+    color: rgb(156, 156, 156);
 }
 
 .navMobile_header form{
@@ -172,6 +178,48 @@ a{
     padding: 1em 0em;
 }
 
+.navMobile_card:hover{
+    color: rgb(156, 156, 156);
+    transition: 250ms;
+    cursor: pointer;
+}
+
+.utilities_Nav{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    border-bottom: 0.7px solid rgb(154, 154, 154);
+    width: 90%;
+    
+}
+
+.utilities_Nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid  rgb(154, 154, 154) ;
+    width: 100%;
+    padding: 8px 4px;
+   
+}
+
+.utilities_Nav ul a{
+    padding: 1em 2px;
+    color: white;
+}
+
+.utilities_Nav ul a:hover{
+    cursor: pointer;
+    color: rgb(154, 154, 154);
+}
+
+.utilities_Nav p {
+    margin: 0px 0px 5px 6px;
+}
+
+
+
 .mobile_navShop{
     display: flex;
     background-color: rgb(24, 24, 24);
@@ -180,7 +228,7 @@ a{
     align-items: center;
     flex-direction: column;
     padding-right: 10px;
-    animation: fade 1s;
+    animation: slideFromRight 500ms;
     position: fixed;
     top: 50%;
     left: 75%;
@@ -189,6 +237,7 @@ a{
     text-align: center;
     height: 100vh;
     width: 50%;
+    padding: 12px;
 }
 
 
@@ -199,6 +248,11 @@ a{
     align-items: center;
     width: 90%;
     margin: 2em 0em;
+}
+
+.shop_header span{
+    color: white;
+    font-size: 1.5em;
 }
 
 .shop_itens{
@@ -329,6 +383,11 @@ a{
         gap: 1.2em;
        
     }
+
+    .navMobile_header form{
+        width: 100%;
+    }
+
     .navMobile_header span{
         margin-left: 10px;
     }
@@ -341,8 +400,8 @@ a{
         font-size: 0.9em;
     }
 
-    input.query{
-        width: 38vw;
+    input.mobileQuery{
+        width: 100%;
         padding: 1.3em 16px;
         font-size: 0.85em;
         margin: 2px;
@@ -384,6 +443,43 @@ a{
         transition: 250ms;
     }
 
+    .utilities_modal{
+        display: flex;
+        background-color: rgb(24, 24, 24);
+        color: white;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        padding-right: 10px;
+        animation: fade 500ms;
+        position: fixed;
+        z-index: 5;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 0em 1.5em 1em 2.5em;
+        margin: 8.2em 3em 3em 5em;
+
+    }
+
+    .utilities_modal ul{
+        list-style: none;
+        
+    }
+
+    .utilities_modal a li{
+      padding: 1em;
+       
+    }
+
+    .utilities_modal a li {
+        color: white;
+    }
+
+    .utilities_modal a li:hover{
+        color: rgb(172, 172, 172);
+        transition: 250ms;
+    }
+
     .mobile_nav{
         width: 30%;
         left: 85%;
@@ -392,6 +488,7 @@ a{
     .mobile_navShop{
         width: 30%;
         left: 85%;
+        padding: 10px;
     }
 
     
@@ -418,5 +515,40 @@ a{
         display: none;
     }
 
+    
+   }
+
+
+   @keyframes fade {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+    
+   }
+
+   @keyframes slideFromRight {
+    from{
+      
+        transform: translate(0, -50%);
+    }
+    to{
+        
+        transform: translate(-50%, -50%);
+    }
+    
+   }
+
+   @keyframes slideFromLeft {
+    from{
+      
+        transform: translate(-100%, -50%);
+    }
+    to{
+        
+        transform: translate(-50%, -50%);
+    }
     
    }

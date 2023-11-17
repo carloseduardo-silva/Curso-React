@@ -46,6 +46,10 @@
   color: white;
 }
 
+.error{
+  margin-top: 1em;
+}
+
 
 
 
@@ -53,6 +57,9 @@
 @media (min-width: 825px) {
   .menu-hamburguer{
     display: none;
+  }
+  .login{
+    padding-left: 2.25em;
   }
 }
 

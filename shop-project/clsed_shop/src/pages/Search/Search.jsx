@@ -12,28 +12,43 @@ const Search = () => {
 
   const[products, setProducts] = useState(null)
   const[load, setLoad] = useState(null)
-  const [lastSearch, setLastSearch] = useState(null)
+  const[lastSearch, setLastSearch] = useState([])
 
 
 
   const productQuery = useQuery()
   const search = productQuery.get('q')
+  console.log(search)
 
 
   
-  const {datas, loading, error } = useFetchDatas('products', search )
-
+  const {datas, loading, error, loadData } = useFetchDatas('products', search )
 
 
   useEffect(() => {
-    setProducts(datas)
     setLoad(loading)
-    setLastSearch(search)
+    setProducts(datas)
+   
   })
 
-  if(!lastSearch){
-    console.log('last:' + lastSearch  + 'search:' + search)
-  }
+  
+
+  useEffect(() =>{
+    
+    if(search){
+      setLastSearch(search)
+    }
+
+    if(!search){
+      //window.location.reload()
+    }
+
+    loadData()
+  }, [search])
+
+  console.log(lastSearch)
+
+
  
 
   

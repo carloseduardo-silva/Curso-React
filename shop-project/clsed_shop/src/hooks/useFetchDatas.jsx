@@ -13,9 +13,7 @@ export const useFetchDatas = (docCollection, search=null) =>{
     const[cancelled, setCancelled] = useState(false)
 
 
-    //query
-    useEffect(()=>{
-        
+    //query + assync exibition of products on home
         const loadData = async () =>{
             if (cancelled) return
 
@@ -28,11 +26,13 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
                 if (search) {
 
-                    q =  query(collection(db, 'products'), where("queryName", "array-contains", search))
+                   
+                    q =  query(collection(db, docCollection), where("queryName", "array-contains", search))
+                    
                     
                 } 
                 else{
-                     q =  query(collection(db, 'products'), orderBy('idProduct'))
+                     q =  query(collection(db, docCollection), orderBy('idProduct'))
                 }
 
                 const querySnapshot = await getDocs(q);
@@ -55,11 +55,7 @@ export const useFetchDatas = (docCollection, search=null) =>{
             }
         }
 
-        loadData()
-    }, [docCollection, cancelled, search])
-
-
-
+       
     // memory leak
     useEffect(() =>{
         return () => setCancelled(true)
@@ -67,5 +63,5 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
 
     //return
-    return {datas, loading, error}
+    return {datas, loading, error, loadData}
 }

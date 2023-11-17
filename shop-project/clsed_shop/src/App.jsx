@@ -17,6 +17,7 @@ import Product from './pages/Product/Product'
 import Register from './pages/Register/Register'
 import Search from './pages/Search/Search'
 import Cart from './pages/Cart/Cart'
+import Verification from './pages/Verification/Verification'
 
 //components
 import Footer from './components/Footer'
@@ -63,7 +64,7 @@ function App() {
               <Route path='/products/:id' element={user ? <Product/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/search' element={user ? <Search/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/cart' element={user ? <Cart/> : <Navigate to={'/login'} /> }></Route>
-             
+              <Route path='/verification' element={user ? <Verification/> : <Navigate to={'/login'} /> }></Route>
               
           </Routes>
           
