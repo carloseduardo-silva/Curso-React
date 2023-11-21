@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "vite": "^5.0.2",
+    "vivagraphjs": "^0.12.0"
+  }
+}
