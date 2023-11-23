@@ -171,7 +171,7 @@
 @media (max-width: 660px) {
 
     .cart_container{
-        padding: 5em 0em;
+        padding: 3em 0em 5em 0em;
             
     }
     
@@ -239,23 +239,23 @@
 
 @media (min-width:944px) {
     .cart_container{
-        padding: 5em 6.25em;
+        padding: 2.5em 6.25em 5em 6.25em;
         
     }
     .paymentInfo_container{
-        margin: 3em 0em 6em 0em;
+        margin: 2.5em 0em 6em 0em;
     }
 }
 
 
 @media (min-width:1100px) {
     .cart_container{
-        padding: 5em 11.25em;
+        padding: 2.5em 11.25em 7em 11.25em;
     }
 }
 
 @media (min-width:1300px) {
     .cart_container{
-        padding: 5em 16.25em;
+        padding: 2.5em 16.25em 7em 16.25em;
     }
 }

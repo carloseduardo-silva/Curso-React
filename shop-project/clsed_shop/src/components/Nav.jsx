@@ -25,6 +25,7 @@ const Nav = () => {
   const[navShopShow, setnavShopShow] = useState(false)
   const[utilitiesModalShow, setUtilitiesModalShow] = useState(false)
   const[utilitiesNavShow, setUtilitiesNavShow] = useState(false)
+  
   const[productQuery, setProductQuery] = useState(null)
   const[shopDatas, setShopDatas] = useState([])
 
@@ -159,7 +160,12 @@ useEffect(() =>{
             <div className={styles.utilities}>
               
               <div onClick={() => toggleUtilitiesModal()} className={styles.utilities_card}>
-                <p> Loja Online </p> <span class="material-symbols-outlined expand">expand_more</span>
+                <p> Loja Online </p> 
+
+                {!utilitiesModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
+
+                {utilitiesModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+
               </div>
 
               <div className={styles.utilities_card}>
@@ -318,7 +324,7 @@ useEffect(() =>{
 
         <div className={styles.shop_summary}>
           {(datas.length == 0) ?<p>Não há items adicionados ao carrinho!</p> :
-          <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina</p>
+          <> <p> Seu subtotal hoje é R$ {totalValue},00. Taxas e frete calculados na próxima pagina.</p>
           <Link to={'/cart'}><button> Compre Já</button></Link>
 </>
             

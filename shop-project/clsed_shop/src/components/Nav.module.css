@@ -349,21 +349,23 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1em;
-    padding: 12px;
+    gap: 1.4em;
+    padding: 14px;
 }
 
 .shop_summary button{
-    color: white;
-    background-color: black;
-    padding: 1em 1.5em;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    padding: 1.05em 2.35em;
     border-radius: 18px;
     border: black;
 
 }
 
 .shop_summary button:hover{
-    background-color: rgb(51, 51, 51);
+    background-color: rgb(59, 59, 59);
+    color: white;
     transition: 250ms;
     cursor: pointer;
 }

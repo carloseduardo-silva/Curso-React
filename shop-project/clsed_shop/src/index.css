@@ -32,6 +32,7 @@
   border-left:none;
   border-right:none;
   width: 30px;
+  margin: 0px;
 }
 
 .quantity button:hover{

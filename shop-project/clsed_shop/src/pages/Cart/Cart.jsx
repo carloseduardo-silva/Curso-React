@@ -31,6 +31,7 @@ useEffect(() =>{
     
     //first item
     if( datas.length == 0 ) {
+      
       setValidateError('nao há items adicionados ao carrinho')
     }else{
       setShopDatas(datas)
@@ -115,10 +116,10 @@ useEffect(() =>{
                             <button onClick={() => removeItem(JSON.parse(data))} class="btn minus1">-</button>
                             <input value={JSON.parse(data).amount}  class="quantity" id="quantity" min="0" name="quantity"  type="number"/>
                             <button onClick={() => addItem(JSON.parse(data))} class="btn add1">+</button>
-                        </div>
+                      </div>
 
                         <div className={styles.product_price}>R$ {(JSON.parse(data).price * JSON.parse(data).amount)},00</div>
-                    </div>
+                        </div>
 
                 </div>
                   ))}
