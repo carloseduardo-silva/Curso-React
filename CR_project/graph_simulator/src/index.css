@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,8 +14,9 @@
 }
 
 .error{
-  background-color: rgba(248, 139, 139, 0.658)(239, 113, 113);
-  padding: 2em;
+  background-color: rgba(255, 199, 199, 0.422);
+  padding: 1.2em;
+  text-align: center;
   border-radius: 10px;
   color: red;
 }
