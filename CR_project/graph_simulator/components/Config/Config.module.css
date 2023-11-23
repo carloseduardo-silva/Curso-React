@@ -46,6 +46,10 @@ button:hover{
     padding-left: 20px;
 }
 
+.form_container form select{
+    padding: 4px 1em 4px 1px;
+    border-radius: 3px;
+}
 
 .form_container form button{
     margin: 0 auto;
