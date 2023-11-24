@@ -72,16 +72,16 @@ const Verification = () => {
                         <option value="Brasil">Brasil</option>
                         <option value="USA">USA</option>
                     </select>
-                    <input placeholder='Nome Completo' type="text" />
-                    <input placeholder='Rua e número da casa' type="text" />
-                    <input placeholder='Apartamento, bloco ou ref.' type="text" />
-                    <input placeholder='Cidade' type="text" />
-                    <select  name="state" id="state">
+                    <input required placeholder='Nome Completo' type="text" />
+                    <input required placeholder='Rua e número da casa' type="text" />
+                    <input required placeholder='Apartamento, bloco ou ref.' type="text" />
+                    <input required placeholder='Cidade' type="text" />
+                    <select required  name="state" id="state">
                         <option value="São Paulo">São Paulo</option>
                         <option value="Rio de Janeiro">Rio de Janeiro</option>
                     </select>
-                    <input placeholder='CEP' type="number" />
-                    <input placeholder='Telefone' type="tel" />
+                    <input required placeholder='CEP' type="number" />
+                    <input required placeholder='Telefone' type="tel" />
 
                     <div className={styles.checkBox}>
                             <input type="checkbox" name="infos" id="infos" />

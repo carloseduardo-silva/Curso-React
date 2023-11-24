@@ -33,6 +33,7 @@
   border-right:none;
   width: 30px;
   margin: 0px;
+  border-radius: 0px;
 }
 
 .quantity button:hover{
@@ -52,6 +53,12 @@
 }
 
 
+
+@media (max-width:380px) {
+    #root{
+      width: 106%;
+    }
+}
 
 
 

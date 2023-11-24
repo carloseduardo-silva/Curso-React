@@ -3,9 +3,13 @@
     background-color: rgb(26, 26, 26);
     justify-content: center;
     flex-direction: column-reverse;
+    text-align: center;
   
 }
 
+.title_mobile{
+    color: white;
+}
 
 .ShopSumaryDesktop_container{
     display: none;
@@ -150,8 +154,8 @@
     
  }
 
- h1{
-    color: white;
+ .clientInfo_container h1{
+   
     margin: 0.6em 0.5em;
  }
 
@@ -163,6 +167,7 @@
 
  .title_desktop{
     display: none;
+    color: white;
  }
 
  .checkBox{
@@ -259,6 +264,32 @@
     text-decoration: underline;
  }
 
+
+
+@media (max-width:450px) {
+    .subtotal{
+        font-size: 19px;
+    }
+    .summayExibition{
+        font-size: 15px;
+    }
+    .product_info{
+        font-size: 12px;
+    }
+    .product_2{
+        font-size: 17px;
+    }
+
+    input{
+        width: 96%;
+    }
+
+    select{
+        width: 99%;
+    }
+    
+}
+ 
 
  @media (min-width: 700px) {
     

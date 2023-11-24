@@ -1,10 +1,27 @@
+.advertisement_container{
+    background-color: black;
+    height: 85.5vh;
+    margin-top: 6em;
+    color: white;
+    text-align: center;
+
+}
+
+.advertisement_container h1{
+    color: white;
+}
+
+
 .shop_container{
     margin: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   
 }
 
-h1{
-    margin-bottom: 1em;
+ .shop_container h1{
+    margin: 1em 0em;
 }
 
 .card_container{
@@ -12,7 +29,9 @@ h1{
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 5px;
+    margin: 0em 0em 4em 0em;
 }
 
 .card{
@@ -24,14 +43,16 @@ h1{
 
 .img_card{
     margin-bottom: 10px;
+    background-color:rgb(238, 238, 238) ;
+    padding: 4em;
+    border-radius: 10px;
 }
 
 .img_card:hover{
-    background-color: lightgrey;
+    background-color: rgb(149, 149, 149);
     border-radius: 3px;
-    
-    
 }
+
 
 a{
     text-decoration: none;
@@ -40,8 +61,18 @@ a{
 
 @media (min-width:944px) {
     .shop_container{
+      
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+        align-items: start;
+       margin: 0 auto;
+       padding: 4em 0em;
        
-        height: 90vh;
+    }
+
+    .shop_container h1{
+        margin: 0em 0em 1em 2em;
     }
     
 }

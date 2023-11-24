@@ -27,6 +27,10 @@ const Home = () => {
     <>
         <Nav/>
 
+        <div className={styles.advertisement_container}>
+            <h1> Advertisement</h1>
+        </div>
+
         <div className={styles.shop_container}>
             <h1>Shop</h1>
            
