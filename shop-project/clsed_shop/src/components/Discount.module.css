@@ -1,0 +1,14 @@
+.discount_container{
+    display: flex;
+    padding: 1em 2.25em;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(24, 24, 24);
+    color: rgb(255, 255, 255);
+    margin-top: 7em;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    font-size: 14px;
+    text-align: center;
+}
+

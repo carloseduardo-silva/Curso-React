@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
+import { motion, AnimatePresence } from "framer-motion";
 
 
 //css
@@ -12,9 +13,12 @@ import { useGetLocalStorage } from '../../hooks/useGetLocalStorage'
 
 //components
 import Nav from '../../components/Nav'
+import Discount from '../../components/Discount'
+//hooks
 import { useCounterValue } from '../../hooks/useCounterValue'
 import { useValidateAddShop } from '../../hooks/useValidateAddShop'
 import { useSumAmount } from '../../hooks/useSumAmount'
+
 
 
 
@@ -25,23 +29,62 @@ const Product = () => {
   const [size, setSize] = useState(null)
   const [amount, setAmount] = useState(null)
   const [validateError, setValidateError] = useState(null)
+  const [imagesArr, setImagesArr] = useState([])
+  const [carrouselShow, setCarrouselShow] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState('left');
 
 
- 
     //get idProduct from URL
     const { id } = useParams()
 
     //fetch data from DB
-    const {data, loading, error:fetchError} = useFetchData('products', null, id)
+    const {data, loading, error:fetchError, image} = useFetchData('products', null, id)
+
+   
+    useEffect(() =>{
+      setImagesArr(data.CarrouselIMG)
+      
+    
+      
+    })
 
     //get datas already saved in localStorage
     const {datas} = useGetLocalStorage()
 
     //return the last key saved on localStorage
     const {counterValue} = useCounterValue(datas)
-  
 
-  
+    //carrousel slides
+    const slideVariants = {
+      hiddenRight: {
+        x: "30%",
+        opacity: 0,
+      },
+      hiddenLeft: {
+        x: "-30%",
+        opacity: 0,
+      },
+      visible: {
+        x: "0",
+        opacity: 1,
+        
+        transition: {
+          duration: 1,
+        },
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.1,
+        display:'none',
+        transition: {
+          duration: 0,
+        },
+      },
+    };
+
+
+    //calls the right fn according to the btn value
     const handleProduct = (e) =>{
       e.preventDefault()
       
@@ -123,20 +166,65 @@ const Product = () => {
        if(useToLocalStorage(shopDatas, counter)){
         window.location.reload()
        }}}
-   
+
+    function nextImage(){
+      setCarrouselShow(true)
+      setDirection("right");
+      setCurrentIndex((prevIndex) =>
+      prevIndex + 1 === imagesArr.length ? 0 : prevIndex + 1
+    );
+    }
+
+    function previousImage(){
+      setCarrouselShow(true)
+      setDirection("left");
+      setCurrentIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? imagesArr.length - 1 : prevIndex - 1
+    );}
+
+    
+    const DotClick = (index) => {
+      setCurrentIndex(index);
+    };
+
 
   return (
     <div>
       <Nav/>
+      <Discount/>
         <div className={styles.product_container}> 
         
           <div className={styles.img_container}>
-              <img src={data.URLimage} alt="camiseta" />
+              <span onClick={() => previousImage()} class="material-symbols-outlined back">arrow_back</span>
+
+              {carrouselShow && <AnimatePresence>
+                <motion.img 
+                key={currentIndex}
+              variants={slideVariants}
+              initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+              animate="visible"
+              exit="exit" 
+              src={imagesArr[currentIndex]} alt="camiseta" /> 
+              </AnimatePresence> }
+              {!carrouselShow && <img src={image} alt="camiseta" />}
+              {!image && <p>Carregando imagem...</p>}
+
+              <span onClick={() => nextImage()} class="material-symbols-outlined forward">arrow_forward</span>
+
           </div>
 
           <div className={styles.product_info}>
-                <h2> {data.name}</h2>
-                <span>R${data.price},00</span>
+                <div className={styles.product_header}>
+                  <h2> {data.name}</h2>
+                  <span>R${data.price},00</span>
+                </div>
+
+                <div className={styles.product_description}>
+                  <h2>Descrição</h2>
+                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni voluptas ut mollitia commodi dolorum. Eveniet adipisci modi saepe obcaecati aliquam vero, dolores molestias earum rerum nemo, ab tempore omnis odit! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+
+                </div>
 
                 <form onSubmit={handleProduct}>
                   

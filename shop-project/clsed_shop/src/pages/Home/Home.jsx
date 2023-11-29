@@ -16,11 +16,9 @@ import { useFetchDatas } from '../../hooks/useFetchDatas'
 
 const Home = () => {
 
-    const {datas, loading, error, loadData} = useFetchDatas('products')
+    const {datas, loading, error} = useFetchDatas('products')
     
-    useEffect(() => {
-        loadData()
-    })
+ 
     
 
   return (

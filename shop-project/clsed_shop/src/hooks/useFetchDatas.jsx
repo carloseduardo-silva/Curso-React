@@ -14,46 +14,53 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
 
     //query + assync exibition of products on home
-        const loadData = async () =>{
-            if (cancelled) return
-
-            setLoading(true)
-
-            try {
-
-                let q;
-                let docsArr = []
-
-                if (search) {
-
-                   
-                    q =  query(collection(db, docCollection), where("queryName", "array-contains", search))
+        useEffect( () =>{
+            const loadData = async () =>{
+                if (cancelled) return
+    
+                setLoading(true)
+    
+                try {
+    
+                    let q;
+                    let docsArr = []
+    
+                    if (search) {
+    
+                       
+                        q =  query(collection(db, docCollection), where("queryName", "array-contains", search))
+                        
+                        
+                    } 
+                    else{
+                         q =  query(collection(db, docCollection), orderBy('idProduct'))
+                    }
+    
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach((doc) => {
+                        
+                     
+                        docsArr.push(doc.data())
+                        
+                        setDatas(docsArr)
+                    });
+    
+                    setLoading(false)
                     
-                    
-                } 
-                else{
-                     q =  query(collection(db, docCollection), orderBy('idProduct'))
+    
+                } catch (error) {
+                    console.log(error.message)
+                    setError(error.message)
+    
+                    setLoading(false)
                 }
-
-                const querySnapshot = await getDocs(q);
-                querySnapshot.forEach((doc) => {
-                    
-                 
-                    docsArr.push(doc.data())
-                    
-                    setDatas(docsArr)
-                });
-
-                setLoading(false)
+    
                 
-
-            } catch (error) {
-                console.log(error.message)
-                setError(error.message)
-
-                setLoading(false)
             }
-        }
+            loadData()
+        } ,[search])
+
+        
 
        
     // memory leak
@@ -63,5 +70,5 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
 
     //return
-    return {datas, loading, error, loadData}
+    return {datas, loading, error}
 }

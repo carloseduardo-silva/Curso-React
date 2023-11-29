@@ -10,48 +10,23 @@ import styles from "./Search.module.css"
 
 const Search = () => {
 
-  const[products, setProducts] = useState(null)
   const[load, setLoad] = useState(null)
-  const[lastSearch, setLastSearch] = useState([])
-
-
+  
 
   const productQuery = useQuery()
   const search = productQuery.get('q')
-  console.log(search)
 
 
-  
-  const {datas, loading, error, loadData } = useFetchDatas('products', search )
+  const {datas, loading, error } = useFetchDatas('products', search )
 
 
   useEffect(() => {
     setLoad(loading)
-    setProducts(datas)
-   
+    
   })
 
   
 
-  useEffect(() =>{
-    
-    if(search){
-      setLastSearch(search)
-    }
-
-    if(!search){
-      //window.location.reload()
-    }
-
-    loadData()
-  }, [search])
-
-  console.log(lastSearch)
-
-
- 
-
-  
 
   return (
     <>
@@ -62,7 +37,7 @@ const Search = () => {
 
         <div className={styles.card_container}>
           
-          {products ? products.map((data) =>(
+          {datas ? datas.map((data) =>(
                     <Link to={`/products/${data.idProduct}`}>
                     <div key={data.idProduct} className={styles.card}>
                         <div className={styles.img_card}>

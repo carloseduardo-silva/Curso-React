@@ -52,6 +52,17 @@
   margin-top: 1em;
 }
 
+.back:hover{
+  transform: translateX(-4px);
+ color: grey;
+}
+
+.forward:hover{
+  transform: translateX(4px);
+ color: grey;
+}
+
+
 
 
 @media (max-width:380px) {

@@ -8,6 +8,7 @@ export const useFetchData = (docCollection, search=null, idProduct) =>{
     const [data, setData] = useState('')
     const [loading, setLoading] = useState('')
     const [error, setError] = useState('')
+    const [image, setImage] = useState('')
 
     //deal with memory leak
     const[cancelled, setCancelled] = useState(false)
@@ -30,7 +31,7 @@ export const useFetchData = (docCollection, search=null, idProduct) =>{
                     
                 } 
                 else{
-                     q = query(collection(db, 'products'), orderBy('idProduct'))
+                    q = query(collection(db, 'products'), orderBy('idProduct'))
                 }
 
                 const querySnapshot = await getDocs(q);
@@ -39,6 +40,9 @@ export const useFetchData = (docCollection, search=null, idProduct) =>{
                //filtering the product through of the id
                 if( doc.data().idProduct == idProduct){
                     setData(doc.data())
+                    let datas = doc.data()
+                    let arr = datas.CarrouselIMG
+                    setImage(arr[0])
                   }
                     
                    
@@ -62,10 +66,11 @@ export const useFetchData = (docCollection, search=null, idProduct) =>{
 
     // memory leak
     useEffect(() =>{
+       
         return () => setCancelled(true)
     },[])
 
 
     //return
-    return {data, loading, error}
+    return {data, loading, error, image}
 }
