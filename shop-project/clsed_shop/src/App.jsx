@@ -18,6 +18,7 @@ import Register from './pages/Register/Register'
 import Search from './pages/Search/Search'
 import Cart from './pages/Cart/Cart'
 import Verification from './pages/Verification/Verification'
+import Collection from './pages/Collection/Collection'
 
 //components
 import Footer from './components/Footer'
@@ -62,6 +63,7 @@ function App() {
               <Route path='/register' element={!user ? <Register/> : <Navigate to={'/'} /> }></Route>
               <Route path='/login' element={!user ? <Login/> : <Navigate to={'/'} /> }></Route>
               <Route path='/products/:id' element={user ? <Product/> : <Navigate to={'/login'} /> }></Route>
+              <Route path='/collection/:section' element={user ? <Collection/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/search' element={user ? <Search/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/cart' element={user ? <Cart/> : <Navigate to={'/login'} /> }></Route>
               <Route path='/verification' element={user ? <Verification/> : <Navigate to={'/login'} /> }></Route>
@@ -71,7 +73,7 @@ function App() {
         
         
         </BrowserRouter>
-        <Footer/>
+       
       
     </AuthContextProvider>
     

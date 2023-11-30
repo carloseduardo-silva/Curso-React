@@ -218,11 +218,11 @@ useEffect(() =>{
         {utilitiesModalShow && 
         <nav className={styles.utilities_modal}>
           <ul>
-            <Link><li>Todas as Roupas</li></Link>
-            <Link><li>Camisetas</li></Link>
-            <Link><li>Casacos e Jaquetas</li></Link>
-            <Link><li>Calças e Shorts</li></Link>
-            <Link><li>Acessórios</li></Link>
+            <Link to={'/collection/all'}><li>Todas as Roupas</li></Link>
+            <Link to={'/collection/shirts'}><li>Camisetas</li></Link>
+            <Link to={'/collection/jackets'}><li>Casacos e Jaquetas</li></Link>
+            <Link to={'/collection/bottom'}><li>Calças e Shorts</li></Link>
+            <Link to={'/collection/acessories'}><li>Acessórios</li></Link>
           </ul>
           </nav>}
 

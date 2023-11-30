@@ -45,8 +45,6 @@ const Product = () => {
     useEffect(() =>{
       setImagesArr(data.CarrouselIMG)
       
-    
-      
     })
 
     //get datas already saved in localStorage
@@ -183,10 +181,6 @@ const Product = () => {
     );}
 
     
-    const DotClick = (index) => {
-      setCurrentIndex(index);
-    };
-
 
   return (
     <div>

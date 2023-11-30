@@ -102,10 +102,16 @@
 @media (min-width:1000px) {
     .product_container{
         flex-direction: row;
-        margin: 0em 1.25em 4em 0em;
+        margin: 2.25em 1.25em 4em 0em;
         justify-content: start;
+        align-items: start;
+        
       
         
+    }
+
+    .product_info{
+        margin-top: 1em;
     }
 
     .img_container{
