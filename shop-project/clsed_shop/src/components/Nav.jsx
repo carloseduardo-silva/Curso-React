@@ -25,7 +25,6 @@ const Nav = () => {
   const[navShopShow, setnavShopShow] = useState(false)
   const[utilitiesModalShow, setUtilitiesModalShow] = useState(false)
   const[utilitiesNavShow, setUtilitiesNavShow] = useState(false)
-  
   const[productQuery, setProductQuery] = useState(null)
   const[shopDatas, setShopDatas] = useState([])
 
@@ -42,6 +41,20 @@ const Nav = () => {
   //sum the price of the products that the clients selected
   const {totalValue} = useTotalValueShop(datas)
 
+  //body class transparent
+  useEffect(() =>{
+
+    if(inputShow){
+      const body = document.querySelector('body')
+      body.classList.toggle('transparent2')
+    } else{
+      const body = document.querySelector('body')
+      body.classList.remove('transparent2')
+      
+
+    }
+
+  }, [inputShow])
  
  
 

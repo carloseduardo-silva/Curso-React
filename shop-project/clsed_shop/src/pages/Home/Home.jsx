@@ -28,11 +28,11 @@ const Home = () => {
     const slideVariants = {
             hiddenRight: {
             x: "30%",
-            opacity: 0,
+            opacity: 0.6,
             },
             hiddenLeft: {
             x: "-30%",
-            opacity: 0,
+            opacity: 0.6,
             },
             visible: {
             x: "0",

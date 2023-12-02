@@ -72,8 +72,8 @@
 
 .container_icons span{
     color: white;
-    margin: 2px 15px 0px 15px;
-    font-size: 1em;
+    margin: 2px 17px 0px 17px;
+    font-size: 0.85em;
 
 }
 
@@ -509,6 +509,7 @@ a{
         font-size: 0.5em;
         margin: 2px;
         max-width: 400px;
+        animation: querySlide 500ms;
     
     }
     
@@ -531,6 +532,18 @@ a{
     }
     to{
         opacity: 1;
+    }
+    
+   }
+
+   @keyframes querySlide {
+    from{
+        opacity: 0;
+        transform: translate(34%, 0);
+    }
+    to{
+        opacity: 1;
+        transform: translate(0%, 0);
     }
     
    }

@@ -17,6 +17,9 @@ const [search, setSearch] = useState(null)
 const[sizeModalShow, setSizeModalShow] = useState(false)
 const[orderModalShow, setOrderModalShow] = useState(false)
 const[priceModalShow, setPriceModalShow] = useState(false)
+const[sizeMobileModalShow, setMobileSizeModalShow] = useState(false)
+const[orderMobileModalShow, setMobileOrderModalShow] = useState(false)
+const[priceMobileModalShow, setMobilePriceModalShow] = useState(false)
 
 const { section } = useParams()
 
@@ -47,8 +50,6 @@ useLayoutEffect(() =>{
 
   }})
 
-
-
 const {datas, loading, error } = useFetchDatas('products', search )
 
 const togglePriceModalShow = () =>{
@@ -75,6 +76,43 @@ const toggleOrderModalShow = () =>{
   }
 }
 
+const toggleMobilePriceModalShow = () =>{
+  if(priceMobileModalShow){
+    const body = document.querySelector('body')
+    body.classList.remove('transparent2')
+    setMobilePriceModalShow(false)
+    
+  } else{
+    const body = document.querySelector('body')
+    body.classList.toggle('transparent2')
+    setMobilePriceModalShow(true)
+  }
+}
+
+const toggleMobileSizeModalShow = () =>{
+  if(sizeMobileModalShow){
+    const body = document.querySelector('body')
+    body.classList.remove('transparent2')
+    setMobileSizeModalShow(false)
+  } else{
+    const body = document.querySelector('body')
+    body.classList.toggle('transparent2')
+    setMobileSizeModalShow(true)
+  }
+}
+
+const toggleMobileOrderModalShow = () =>{
+  if(orderMobileModalShow){
+    const body = document.querySelector('body')
+    body.classList.remove('transparent2')
+    setMobileOrderModalShow(false)
+  } else{
+    const body = document.querySelector('body')
+    body.classList.toggle('transparent2')
+    setMobileOrderModalShow(true)
+  }
+}
+
   return (
     <div>
       <Nav/>
@@ -89,7 +127,7 @@ const toggleOrderModalShow = () =>{
           {sizeModalShow &&<span class="material-symbols-outlined">expand_less</span>}</div>
 
           {sizeModalShow &&  
-          <form>
+          <form className={styles.filterCheck}>
               <label>
                 <input type="checkbox" name="P/S" id="P/S" />
                 P/S
@@ -123,11 +161,13 @@ const toggleOrderModalShow = () =>{
           </div>
 
           {priceModalShow &&  
-          <div  className={styles.filter_price}>
-            <input type="number" />   
-            -
-             <input type="number" />  
-          </div>}
+          <form  className={styles.filter_price}>
+            <label>R$<input placeholder='0' type="number" />  </label> 
+
+              <h2>-</h2>
+
+             <label> R$<input placeholder='349'  type="number" />  </label>
+          </form>}
 
 
           <div onClick={() => toggleOrderModalShow()} className={styles.filter_Card}>
@@ -137,7 +177,7 @@ const toggleOrderModalShow = () =>{
           </div>
 
           {orderModalShow &&  
-          <form>
+          <form className={styles.filterCheck}>
             <label>
               <input type="radio" name="Destaques" id="Destaques" />
               Em Destaques
@@ -165,6 +205,35 @@ const toggleOrderModalShow = () =>{
 
         </div>
 
+        <div className={styles.filterMobile_container}>
+
+          <div onClick={() => toggleMobileSizeModalShow()} className={styles.filter_Card}>
+          <p>Tamanho</p>
+          {!sizeMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
+          {sizeMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}</div>
+
+  
+
+
+          <div onClick={() => toggleMobilePriceModalShow()} className={styles.filter_Card}>
+            <p>Preço</p>
+          {!priceMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
+          {priceMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          </div>
+
+          
+
+
+          <div onClick={() => toggleMobileOrderModalShow()} className={styles.filter_Card}>
+            <p>Ordenar</p>
+          {!orderMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
+          {orderMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          </div>
+
+
+        </div>
+
+
         <div className={styles.productsQuery_container}>
           {datas.length == 0 && <p>Carregando produtos...</p>}
           {datas.length > 0 &&  datas.map((product) =>(
@@ -184,7 +253,103 @@ const toggleOrderModalShow = () =>{
 
       </div>
 
+
+    {sizeMobileModalShow &&  
+        <div className={styles.filterMobile_modal}>
+
+          <div className={styles.filter_Header}>
+            <h2>Tamanho</h2> 
+            <span onClick={() => toggleMobileSizeModalShow()}  class="material-symbols-outlined">close</span>
+          </div>
+
+            <form className={styles.filterCheck}>
+              <label>
+                <input type="checkbox" name="P/S" id="P/S" />
+                P/S
+              </label>
+              <label>
+                <input type="checkbox" name="M" id="M" />
+                M
+              </label>
+              <label>
+                <input type="checkbox" name="G/L" id="G/L" />
+                G/L
+              </label>
+              <label>
+                <input type="checkbox" name="GG/XL" id="GG/XL" />
+                GG/XL
+              </label>
+
+              <label>
+                <input type="checkbox" name="" id="XGG/XXL" />
+                XGG/XXL
+              </label>
+
+            
+          </form>
+        </div>}
+
+    {priceMobileModalShow && 
+     <div className={styles.filterMobile_modal}>
+
+        <div className={styles.filter_Header}>
+            <h2>Preço</h2> 
+            <span onClick={() => toggleMobilePriceModalShow()}  class="material-symbols-outlined">close</span>
+        </div>
+
+       <form  className={styles.filter_price}>
+        <label>R$<input placeholder='0' type="number" />  </label> 
+
+          <h2>-</h2>
+
+        <label> R$<input placeholder='349'  type="number" />  </label>
+
+      </form>
+     </div>}
+
+     {orderMobileModalShow &&  
+         <div className={styles.filterMobile_modal}>
+
+            <div className={styles.filter_Header}>
+              <h2>Ordenar</h2> 
+              <span onClick={() => toggleMobileOrderModalShow()} class="material-symbols-outlined">close</span>
+            </div>
+
+           <form className={styles.filterCheck}>
+            <label>
+              <input type="radio" name="Destaques" id="Destaques" />
+              Em Destaques
+            </label>
+            <label>
+              <input type="radio" name="Mais-VendidosAlfabética" id="Mais-VendidosAlfabética" />
+              Mais Vendidos
+            </label>
+            <label>
+              <input type="radio" name="Alfabética" id="Alfabética" />
+              Ordem Alfabética
+            </label>
+            <label>
+              <input type="radio" name="Menor-preço" id="Menor-preço" />
+              Menor Preço
+            </label>
+
+            <label>
+              <input type="radio" name="Maior-preço" id="Maior-preço" />
+              Maior Preço
+            </label>
+            </form>
+         </div>
+            }
+
+
+
+
     </div>
+
+    
+
+
+
   )
 }
 
