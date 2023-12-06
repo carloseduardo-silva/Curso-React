@@ -15,7 +15,9 @@ export const useFetchDatas = (docCollection, search=null) =>{
 
     //query + assync exibition of products on home
         useEffect( () =>{
-            const loadData = async () =>{
+
+            const loadData = async (filter) =>{
+
                 if (cancelled) return
     
                 setLoading(true)
@@ -27,11 +29,12 @@ export const useFetchDatas = (docCollection, search=null) =>{
     
                     if (search) {
     
-                       
                         q =  query(collection(db, docCollection), where("queryName", "array-contains", search))
                         
-                        
                     } 
+                    else if(filter){
+                        console.log(filter)
+                    }
                     else{
                          q =  query(collection(db, docCollection), orderBy('idProduct'))
                     }

@@ -92,3 +92,11 @@ a{
     }
     
 }
+
+@media (max-width: 410px) {
+
+    .advertisement_container img{
+        width: 111%;
+    }
+    
+}

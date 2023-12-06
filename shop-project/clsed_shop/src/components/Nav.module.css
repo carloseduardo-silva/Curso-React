@@ -206,11 +206,13 @@ a{
     width: 100%;
     padding: 8px 4px;
    
+   
 }
 
 .utilities_Nav ul a{
     padding: 1em 2px;
     color: white;
+    animation: NavUtilitiesSlide 750ms ;
 }
 
 .utilities_Nav ul a:hover{
@@ -379,7 +381,8 @@ a{
 
 
 
-@media (max-width: 550px) {
+
+@media (max-width: 560px) {
 
 
    
@@ -413,6 +416,16 @@ a{
         margin: 2px;
         max-width: 400px;
     
+    }
+
+    .card_info h4{
+        font-size: 1em;
+
+    }
+
+    .card_info p{
+        font-size: 13px;
+
     }
 
 
@@ -526,6 +539,10 @@ a{
    }
 
 
+
+
+
+
    @keyframes fade {
     from{
         opacity: 0;
@@ -568,6 +585,18 @@ a{
     to{
         
         transform: translate(-50%, -50%);
+    }
+    
+   }
+
+   @keyframes NavUtilitiesSlide {
+    from{
+      
+        transform: translate(0, -40%);
+    }
+    to{
+        
+        transform: translate(0%, 0%);
     }
     
    }

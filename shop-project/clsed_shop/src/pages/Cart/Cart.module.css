@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 5em 4.25em;
+    padding: 9em 4.25em 7em 4.25em;
 }
 
 .cart_container h1 {
@@ -172,7 +172,7 @@
 @media (max-width: 660px) {
 
     .cart_container{
-        padding: 3em 0em 5em 0em;
+        padding: 9em 0em 5em 0em;
             
     }
     
@@ -190,6 +190,7 @@
 
     .product_info{
         margin-top:1em;
+        margin-right: 0em;
     }
 
     .product_2{
@@ -225,6 +226,7 @@
 
 .product_info{
     font-size: 14.25px;
+    margin-right: 1em;
 }
 .product_1 img{
     width: 135px;
@@ -240,7 +242,7 @@
 
 @media (min-width:944px) {
     .cart_container{
-        padding: 2.5em 6.25em 5em 6.25em;
+        padding: 9em 6.25em 5em 6.25em;
         
     }
     .paymentInfo_container{
@@ -251,12 +253,12 @@
 
 @media (min-width:1100px) {
     .cart_container{
-        padding: 2.5em 11.25em 7em 11.25em;
+        padding: 9em 11.25em 7em 11.25em;
     }
 }
 
 @media (min-width:1300px) {
     .cart_container{
-        padding: 2.5em 16.25em 7em 16.25em;
+        padding: 9em 16.25em 7em 16.25em;
     }
 }

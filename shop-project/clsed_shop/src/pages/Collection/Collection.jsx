@@ -1,4 +1,4 @@
-import {useLayoutEffect, useState} from 'react'
+import {useEffect, useLayoutEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 
 
@@ -14,16 +14,26 @@ import { useFetchDatas } from '../../hooks/useFetchDatas'
 const Collection = () => {
 
 const [search, setSearch] = useState(null)
-const[sizeModalShow, setSizeModalShow] = useState(false)
-const[orderModalShow, setOrderModalShow] = useState(false)
-const[priceModalShow, setPriceModalShow] = useState(false)
-const[sizeMobileModalShow, setMobileSizeModalShow] = useState(false)
-const[orderMobileModalShow, setMobileOrderModalShow] = useState(false)
-const[priceMobileModalShow, setMobilePriceModalShow] = useState(false)
+const [sizeModalShow, setSizeModalShow] = useState(false)
+const [orderModalShow, setOrderModalShow] = useState(false)
+const [priceModalShow, setPriceModalShow] = useState(false)
+const [sizeMobileModalShow, setMobileSizeModalShow] = useState(false)
+const [orderMobileModalShow, setMobileOrderModalShow] = useState(false)
+const [priceMobileModalShow, setMobilePriceModalShow] = useState(false)
+const [filterOrder, setFilterOrder] = useState(null)
+const [filterOrderCounter, setFilterOrderCounter] = useState(null)
+const [filterSizes, setFilterSizes] = useState(null)
+const [filterMinPrice, setFilterMinPrice] = useState(0)
+const [filterMaxPrice, setFilterMaxPrice] = useState(349)
 
 const { section } = useParams()
 
-useLayoutEffect(() =>{
+
+
+
+//UseEffects
+
+  useLayoutEffect(() =>{
   
   switch(section){
     case 'all':
@@ -50,8 +60,28 @@ useLayoutEffect(() =>{
 
   }})
 
+  useEffect(() =>{
+  setFilterOrderCounter(1)
+  console.log(filterOrder)
+  //loadDatas(filterOrder)
+
+}, [filterOrder])
+
+  useEffect(() =>{
+
+  console.log(filterSizes)
+  //loadDatas(filterSizes)
+
+}, [filterSizes])
+
+
+
+//hook fetching datas
 const {datas, loading, error } = useFetchDatas('products', search )
 
+
+
+//fn
 const togglePriceModalShow = () =>{
   if(priceModalShow){
     setPriceModalShow(false)
@@ -71,6 +101,7 @@ const toggleSizeModalShow = () =>{
 const toggleOrderModalShow = () =>{
   if(orderModalShow){
     setOrderModalShow(false)
+    setFilterOrderCounter(null)
   } else{
     setOrderModalShow(true)
   }
@@ -113,6 +144,13 @@ const toggleMobileOrderModalShow = () =>{
   }
 }
 
+
+const handleFilterPrice = (e) =>{
+    e.preventDefault()
+  //basear-se no useGraphGenerator refatorar para utilizar Chamadas assincronas de dados, diretamente pelas funções e nao pela chamada do Hook.
+    
+}
+
   return (
     <div>
       <Nav/>
@@ -129,24 +167,24 @@ const toggleMobileOrderModalShow = () =>{
           {sizeModalShow &&  
           <form className={styles.filterCheck}>
               <label>
-                <input type="checkbox" name="P/S" id="P/S" />
+                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="P/S" id="P/S" value="P/S" />
                 P/S
               </label>
               <label>
-                <input type="checkbox" name="M" id="M" />
+                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="M" id="M" value="M" />
                 M
               </label>
               <label>
-                <input type="checkbox" name="G/L" id="G/L" />
+                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="G/L" id="G/L" value="G/L" />
                 G/L
               </label>
               <label>
-                <input type="checkbox" name="GG/XL" id="GG/XL" />
+                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="GG/XL" id="GG/XL" value="GG/XL" />
                 GG/XL
               </label>
 
               <label>
-                <input type="checkbox" name="" id="XGG/XXL" />
+                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="XGG/XXL" id="XGG/XXL" value="XGG/XXL" />
                 XGG/XXL
               </label>
         
@@ -162,16 +200,19 @@ const toggleMobileOrderModalShow = () =>{
 
           {priceModalShow &&  
           <form  className={styles.filter_price}>
-            <label>R$<input placeholder='0' type="number" />  </label> 
+            <label>R$<input value={filterMinPrice} onChange={(e) =>{setFilterMinPrice(e.target.value)}} placeholder='0' type="number" />  </label> 
 
               <h2>-</h2>
 
-             <label> R$<input placeholder='349'  type="number" />  </label>
+             <label> R$<input value={filterMaxPrice} onChange={(e) =>{setFilterMaxPrice(e.target.value)}} placeholder='349'  type="number" />  </label>
+
+              <button onSubmit={handleFilterPrice}> Filtrar</button>
+
           </form>}
 
 
           <div onClick={() => toggleOrderModalShow()} className={styles.filter_Card}>
-            <p>Ordenar</p>
+            <p>Ordenar {filterOrderCounter &&`(${filterOrderCounter})`}</p>
           {!orderModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
           {orderModalShow &&<span class="material-symbols-outlined">expand_less</span>}
           </div>
@@ -179,24 +220,24 @@ const toggleMobileOrderModalShow = () =>{
           {orderModalShow &&  
           <form className={styles.filterCheck}>
             <label>
-              <input type="radio" name="Destaques" id="Destaques" />
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Destaques" value="Destaques" />
               Em Destaques
             </label>
             <label>
-              <input type="radio" name="Mais-VendidosAlfabética" id="Mais-VendidosAlfabética" />
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Mais-Vendidos"  value="Mais-Vendidos"/>
               Mais Vendidos
             </label>
             <label>
-              <input type="radio" name="Alfabética" id="Alfabética" />
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Alfabética" value="Alfabética" />
               Ordem Alfabética
             </label>
             <label>
-              <input type="radio" name="Menor-preço" id="Menor-preço" />
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Menor-preço" value="Menor-preço" />
               Menor Preço
             </label>
 
             <label>
-              <input type="radio" name="Maior-preço" id="Maior-preço" />
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Maior-preço" value="Maior-preço" />
               Maior Preço
             </label>
         

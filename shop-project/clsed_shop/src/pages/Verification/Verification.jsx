@@ -113,7 +113,7 @@ const Verification = () => {
                                 <div className={styles.product_info}>
                                     <p>{JSON.parse(data).name}</p>
                                     <p>{JSON.parse(data).size}</p>
-                                    <p>R${JSON.parse(data).price},00</p>
+                                    <p>R${JSON.parse(data).price},00  x {JSON.parse(data).amount}</p>
                                 </div>
                             </div>
                         
@@ -170,7 +170,7 @@ const Verification = () => {
                                 <div className={styles.product_info}>
                                     <p>{JSON.parse(data).name}</p>
                                     <p>{JSON.parse(data).size}</p>
-                                    <p>R${JSON.parse(data).price},00</p>
+                                    <p>R${JSON.parse(data).price},00  x {JSON.parse(data).amount}</p>
                                 </div>
                             </div>
                         

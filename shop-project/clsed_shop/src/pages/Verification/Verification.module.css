@@ -53,6 +53,7 @@
 .ShopSumary_container{
     background-color: rgb(241, 241, 241);
     padding: 2em 2em 1em 2em;
+    animation: ShopSummarySlide 620ms;
 }
 
 .cart_products{
@@ -266,7 +267,7 @@
 
 
 
-@media (max-width:450px) {
+@media (max-width:470px) {
     .subtotal{
         font-size: 19px;
     }
@@ -274,10 +275,18 @@
         font-size: 15px;
     }
     .product_info{
-        font-size: 12px;
+        font-size: 13px;
+        
     }
+
+    .cart_products{
+       align-items: center;
+       margin-bottom: 1.75em;
+    }
+
     .product_2{
         font-size: 17px;
+        display: none;
     }
 
     input{
@@ -287,6 +296,12 @@
     select{
         width: 99%;
     }
+
+    .cart_subtotal{
+        align-items: center;
+    }
+
+   
     
 }
  
@@ -298,10 +313,14 @@
     }
 
     .summayExibition{
-        margin-left:7em;
+        margin-left:5.5em;
     }
     .subtotal{
-        margin-right:6em;
+        margin-right:3.5em;
+    }
+    
+    .ShopSumary_container{
+        padding: 2em 4.5em 1em 4.5em;
     }
 
  }
@@ -376,12 +395,12 @@
      
      .product_2{
          display: flex;
-         font-size: 14px;
+         font-size: 15px;
          gap: 3em;
      }
      
      .product_1 img{
-         width: 70px;
+         width: 74px;
      }
      
      .product_info{
@@ -389,7 +408,7 @@
          align-items: start;
          flex-direction: column;
          justify-content: start;
-         font-size: 13px;
+         font-size: 14px;
         
      }
      
@@ -419,6 +438,18 @@
 
     .clientInfo_container{
         padding: 1.2em 5em 1.2em 10em;
+    }
+    
+ }
+
+ @keyframes ShopSummarySlide {
+    from{
+        opacity: 0.85;
+        transform:translateY(-10%)
+    }
+    to{
+        opacity: 1;
+        transform:translateY(0)
     }
     
  }
