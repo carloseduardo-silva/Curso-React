@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useState} from 'react'
+import {Component, useEffect, useLayoutEffect, useState, useMemo} from 'react'
 import { useParams } from 'react-router-dom'
 
 
@@ -10,9 +10,11 @@ import Nav from '../../components/Nav'
 
 //hooks
 import { useFetchDatas } from '../../hooks/useFetchDatas'
+import { useFetchCollection } from '../../hooks/useFetchCollection'
 
 const Collection = () => {
 
+const [reload, setReload] = useState(null)
 const [search, setSearch] = useState(null)
 const [sizeModalShow, setSizeModalShow] = useState(false)
 const [orderModalShow, setOrderModalShow] = useState(false)
@@ -26,39 +28,41 @@ const [filterSizes, setFilterSizes] = useState(null)
 const [filterMinPrice, setFilterMinPrice] = useState(0)
 const [filterMaxPrice, setFilterMaxPrice] = useState(349)
 
+
+
 const { section } = useParams()
-
-
 
 
 //UseEffects
 
-  useLayoutEffect(() =>{
+useLayoutEffect(() =>{
+
+switch(section){
+  case 'all':
+    setSearch('all')
+    break;
   
-  switch(section){
-    case 'all':
-      setSearch(null)
-      break;
-    
-    case 'shirts':
-      setSearch("camiseta")
-      break;
+  case 'camiseta':
+    setSearch("camiseta")
+    break;
 
-    case 'jackets':
-      setSearch('moletom')
-      break;
+  case 'moletom':
+    setSearch('moletom')
+    break;
+      
+  case 'bottom':
+    setSearch('bottom')
+    break;
+
+  case 'acessories':
+    setSearch('acessório')
+    break;
+
         
-    case 'bottom':
-      setSearch('bottom')
-      break;
 
-    case 'acessories':
-      setSearch('acessório')
-      break;
+}})
 
-          
 
-  }})
 
   useEffect(() =>{
   setFilterOrderCounter(1)
@@ -75,11 +79,19 @@ const { section } = useParams()
 }, [filterSizes])
 
 
-
 //hook fetching datas
-const {datas, loading, error } = useFetchDatas('products', search )
+const {datas, loading, error} = useFetchDatas('products', search)
 
 
+
+useEffect(() =>{
+  if(!search ){
+    setReload(section)
+  }
+  else if(reload && reload !== section){
+    window.location.reload()
+  }
+}, [search])
 
 //fn
 const togglePriceModalShow = () =>{
@@ -155,8 +167,10 @@ const handleFilterPrice = (e) =>{
     <div>
       <Nav/>
 
-      <div className={styles.collection_container}>
+      
 
+      <div className={styles.collection_container}>
+  
         <div className={styles.filter_container}>
 
           <div onClick={() => toggleSizeModalShow()} className={styles.filter_Card}>

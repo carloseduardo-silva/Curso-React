@@ -168,7 +168,7 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 0.7px solid rgb(154, 154, 154);
+   
     width: 90%;
     
 }
@@ -179,7 +179,8 @@ a{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 1em 0em;
+    padding: 1.15em 0em;
+    border-bottom: 0.3px solid rgb(154, 154, 154);
 }
 
 .navMobile_card:hover{
@@ -193,7 +194,7 @@ a{
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    border-bottom: 0.7px solid rgb(154, 154, 154);
+   
     width: 90%;
     
 }
@@ -202,9 +203,9 @@ a{
     list-style: none;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid  rgb(154, 154, 154) ;
     width: 100%;
     padding: 8px 4px;
+    border-bottom: 0.3px solid rgb(154, 154, 154);
    
    
 }

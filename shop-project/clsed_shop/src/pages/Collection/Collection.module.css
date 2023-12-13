@@ -280,6 +280,7 @@
         max-width: 400px;
         gap:25px;
         font-size: 18px;
+        height: 95vh;
     }
 
     .filter_Card{

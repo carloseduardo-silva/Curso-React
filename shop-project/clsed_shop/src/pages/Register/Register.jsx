@@ -83,7 +83,12 @@ const Register = () => {
 
       <input value={confirmPassword} onChange={(e) =>{setConfirmPassword(e.target.value)}} name='password' placeholder="Confirme sua senha" type="password" />
 
-      {!loading && <button className="btn">Criar Conta</button> }
+
+      {!loading && <>
+      <button className="btn">Criar Conta</button> 
+      <Link to={'/login'}>Voltar</Link>
+      </>
+      }
       {loading && <button disabled className="btn">Aguarde ...</button> }
       {error && <p className="error"> {error}</p>}
       {registered && <p className={styles.registered}> Cadastro Confirmado!</p>}

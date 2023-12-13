@@ -225,6 +225,7 @@ const Product = () => {
                 <label>
                   <p>Tamanho</p>
                   <select  onChange={(e) => setSize(e.target.value)} name="sizes" id="sizes">
+                    <option value="P/S">-</option>
                     <option value="P/S">P/S</option>
                     <option value="M">M</option>
                     <option value="G/L">G/L</option>

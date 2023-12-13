@@ -32,9 +32,8 @@ export const useFetchDatas = (docCollection, search=null) =>{
                         q =  query(collection(db, docCollection), where("queryName", "array-contains", search))
                         
                     } 
-                    else if(filter){
-                        console.log(filter)
-                    }
+                   
+        
                     else{
                          q =  query(collection(db, docCollection), orderBy('idProduct'))
                     }

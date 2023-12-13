@@ -13,6 +13,7 @@ const Search = () => {
   const[load, setLoad] = useState(null)
   
 
+  //catch param from url
   const productQuery = useQuery()
   const search = productQuery.get('q')
 

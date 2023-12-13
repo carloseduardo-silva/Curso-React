@@ -2,19 +2,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: start;
-    height: 90vh;
-    margin-top: 2em;
+    justify-content: center;
+    margin-top: 10em;
     padding-bottom: 4em;
-    
+    text-align: center;
     
 }
 
 .form_container form{
     display: flex;
     flex-direction: column;
-    width: 300px;
-
+    
+    
 }
 
 .form_container input{
@@ -23,6 +22,7 @@
     margin: 10px;
     border-radius: 5px;
     font-size: 1em;
+    width: 75vw;
     
 }
 
@@ -52,8 +52,14 @@
     border-bottom: 1px solid rgb(136, 136, 136);;
 }
 
+.form_container a{
+    text-decoration: underline;
+    margin: 0 auto;
+    color:  blue;
+}
+
 h1{
-    font-size:3em;
+    font-size:2.75em;
     margin-bottom: 15px;
 }
 
@@ -68,12 +74,13 @@ h1{
 }
 
 
-@media (min-width:768px) {
-    .form_container form{
-        width: 475px;
+@media (min-width:738px) {
+    .form_container input{
+        width: 450px;
     }
     .form_container button{
         margin: 15px 100px;
     }
     
 }
+

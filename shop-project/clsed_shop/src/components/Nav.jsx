@@ -57,6 +57,22 @@ const Nav = () => {
   }, [inputShow])
  
  
+  
+  /* useEffect(() =>{
+    let collections = document.querySelectorAll('nav ul a ')
+  
+    let collectionsArr = Array.prototype.slice.call(collections)
+
+    console.log(collections)
+    console.log(collectionsArr)
+    
+    collectionsArr.map((collection) => {
+      collection.addEve
+    })
+
+  }) */
+
+
 
   //signOut
   const confirmLogout = () =>{
@@ -231,11 +247,11 @@ useEffect(() =>{
         {utilitiesModalShow && 
         <nav className={styles.utilities_modal}>
           <ul>
-            <Link to={'/collection/all'}><li>Todas as Roupas</li></Link>
-            <Link to={'/collection/shirts'}><li>Camisetas</li></Link>
-            <Link to={'/collection/jackets'}><li>Casacos e Jaquetas</li></Link>
-            <Link to={'/collection/bottom'}><li>Calças e Shorts</li></Link>
-            <Link to={'/collection/acessories'}><li>Acessórios</li></Link>
+            <Link  to={'/collection/all'}><li>Todas as Roupas</li></Link>
+            <Link  to={'/collection/camiseta'}><li>Camisetas</li></Link>
+            <Link  to={'/collection/moletom'}><li>Casacos e Jaquetas</li></Link>
+            <Link  to={'/collection/bottom'}><li>Calças e Shorts</li></Link>
+            <Link  to={'/collection/acessories'}><li>Acessórios</li></Link>
           </ul>
           </nav>}
 
@@ -282,11 +298,21 @@ useEffect(() =>{
 
           <ul>
             <Link to={'/collection/all'}><li>Todas as Roupas</li></Link>
-            <Link to={'/collection/shirts'}><li>Camisetas</li></Link>
-            <Link to={'/collection/jackets'}><li>Casacos e Jaquetas</li></Link>
+            <Link to={'/collection/camiseta'}><li>Camisetas</li></Link>
+            <Link to={'/collection/moletom'}><li>Casacos e Jaquetas</li></Link>
             <Link to={'/collection/bottom'}><li>Calças e Shorts</li></Link>
             <Link to={'/collection/acessories'}><li>Acessórios</li></Link>
           </ul>
+
+          
+          <div className={styles.navMobile_card}>
+            <p> Lojas Físicas </p> 
+          </div>
+
+          <div className={styles.navMobile_card}>
+            <p> Ajuda </p> <span> {`>`} </span>
+          </div>
+
           </div>
           }
 

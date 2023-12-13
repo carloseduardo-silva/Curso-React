@@ -39,10 +39,3 @@ a{
     color: black;
 }
 
-@media (min-width:944px) {
-    .search_container{
-       
-        height: 90vh;
-    }
-    
-}
