@@ -14,7 +14,7 @@ import { useFetchCollection } from '../../hooks/useFetchCollection'
 
 const Collection = () => {
 
-const [reload, setReload] = useState(null)
+const [lastQuery, setLastQuery] = useState(null)
 const [search, setSearch] = useState(null)
 const [sizeModalShow, setSizeModalShow] = useState(false)
 const [orderModalShow, setOrderModalShow] = useState(false)
@@ -86,9 +86,9 @@ const {datas, loading, error} = useFetchDatas('products', search)
 
 useEffect(() =>{
   if(!search ){
-    setReload(section)
+    setLastQuery(section)
   }
-  else if(reload && reload !== section){
+  else if(lastQuery && lastQuery !== section){
     window.location.reload()
   }
 }, [search])

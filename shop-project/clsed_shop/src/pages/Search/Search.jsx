@@ -11,7 +11,7 @@ import styles from "./Search.module.css"
 const Search = () => {
 
   const[load, setLoad] = useState(null)
-  
+  const[lastQuery, setLastQuery] = useState(null)
 
   //catch param from url
   const productQuery = useQuery()
@@ -21,7 +21,23 @@ const Search = () => {
   const {datas, loading, error } = useFetchDatas('products', search )
 
 
+  useEffect(() =>{
+    if(search){
+      setLastQuery(search)
+      console.log(lastQuery)
+    }
+  },[search])
+
+  useEffect(() =>{
+    if(lastQuery && search && lastQuery !== search){
+      window.location.reload()
+      
+
+    }
+  },[search])
+
   useEffect(() => {
+    
     setLoad(loading)
     
   })
@@ -34,11 +50,11 @@ const Search = () => {
         <Nav/>
 
       <div className={styles.search_container}>
-      {load ? <h1> Buscando produtos...</h1> : <h1> Resultado da pesquisa:</h1>}
+      {load && <h1> Buscando produtos...</h1> }
 
         <div className={styles.card_container}>
           
-          {datas ? datas.map((data) =>(
+          {datas.length > 0 && !load ? datas.map((data) =>(
                     <Link to={`/products/${data.idProduct}`}>
                     <div key={data.idProduct} className={styles.card}>
                         <div className={styles.img_card}>
