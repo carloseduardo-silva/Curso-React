@@ -48,7 +48,7 @@ function App() {
 
 
   if(loadingUser) {
-    return <p> Carregando ...</p>
+    return  <div class="logo"></div>
   }
  
 

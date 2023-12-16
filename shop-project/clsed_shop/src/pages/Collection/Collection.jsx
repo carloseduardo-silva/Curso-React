@@ -298,7 +298,7 @@ const handleFilterPrice = (e) =>{
               </div>
 
               <div>
-                <p>{product.name}</p>
+                <p className={styles.data_name}>{product.name}</p>
                 <p>R${product.price}.00</p>
               </div>
             </div>

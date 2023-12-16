@@ -27,11 +27,11 @@ const Home = () => {
     //carrousel slides
     const slideVariants = {
             hiddenRight: {
-            x: "30%",
+            x: "20%",
             opacity: 0.6,
             },
             hiddenLeft: {
-            x: "-30%",
+            x: "-20%",
             opacity: 0.6,
             },
             visible: {
@@ -39,7 +39,7 @@ const Home = () => {
             opacity: 1,
             
             transition: {
-                duration: 0.7,
+                duration: 0.4,
             },
             },
             exit: {
@@ -53,8 +53,11 @@ const Home = () => {
         };
     
     useEffect(() =>{
-        setImagesArr(['https://www.shutterstock.com/image-vector/black-friday-sale-banner-poster-600nw-1191980107.jpg',
-            "https://www.shutterstock.com/image-vector/black-friday-sale-banner-poster-600nw-1221698800.jpg"
+        setImagesArr(['https://cdn.vox-cdn.com/thumbor/Gzz0B3GqZRXvAqphlWA5pUifZGM=/88x0:1509x1066/1200x675/filters:focal(88x0:1509x1066)/cdn.vox-cdn.com/uploads/chorus_image/image/50128435/wmns9.0.0.jpg',
+        "https://uncoverla.sfo3.digitaloceanspaces.com/wp-content/uploads/2019/10/29125942/fred-segal-stadium-goods-pop-up-west-hollywood_2019_10_02-scaled.jpg",
+        "https://images.the500hiddensecrets.com/2019-03/new_york-shop-kith.jpg?auto=format&fit=max&h=1080&ixlib=php-1.1.0&q=65&w=1920&s=1e89fe8a766debb0395ac9625bcbacfa",
+        "https://images.the500hiddensecrets.com/2023-05/new_york-shop-only_ny.jpg?auto=format&fit=max&h=1080&ixlib=php-1.1.0&q=65&w=1920&s=608e2324e90965c2f29e852a8f71b9c1",
+        "https://images.405magazine.com/wp-content/uploads/2022/02/img-5630-scaled-1.jpg"
         ])
         },[])
 
@@ -97,6 +100,8 @@ const Home = () => {
                 src={imagesArr[currentIndex]} alt="camiseta" /> 
             </AnimatePresence>
 
+            <Link to={'/collection/all'} className={styles.show_more}> Ver Produtos</Link>
+
             <span onClick={() => nextImage()} class="material-symbols-outlined forward">arrow_forward</span>
 
         </div>
@@ -105,14 +110,14 @@ const Home = () => {
             <h1>Shop</h1>
            
             <div  className={styles.card_container}>
-
+        
             {datas.map((data) =>(
                 <Link to={`/products/${data.idProduct}`}>  
                 <div key={data.idProduct} className={styles.card}>
                     <div className={styles.img_card}>
                         <img src={data.URLimage} alt="camiseta" />
                     </div>
-                    <p> {data.name}</p>
+                    <p className={styles.data_name}> {data.name}</p>
                     <p> R${data.price},00</p>
                 </div>
              </Link>
@@ -123,6 +128,8 @@ const Home = () => {
             </div>
 
         </div>
+
+       
         
     
     </>

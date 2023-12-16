@@ -137,6 +137,10 @@
     width: 330px;
 }
 
+.data_name{
+    font-weight: bolder;
+}
+
 .filter_Card span{
     color: black;
 }
@@ -274,7 +278,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        width: 380px;
+        width: 280px;
         padding: 1em;
         margin: 0px 1.25vw 3em 0px;
         max-width: 400px;

@@ -11,3 +11,45 @@
     border-radius: 8px;
     margin: 5px 10px;
 }
+
+.logo {
+    position: absolute;
+    top: 38%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    height: 4em;
+    width:4em ;
+    padding: 1em;
+    will-change: filter;
+    transition: filter 300ms;
+    animation: logo-spin infinite 1s linear;
+    background-color: transparent;
+    border-radius:75%;
+    border-top: 5px solid black;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+  
+
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 600px) {
+
+    .logo{
+        top: 33%;
+        left: 39%;
+    }
+    
+  }
