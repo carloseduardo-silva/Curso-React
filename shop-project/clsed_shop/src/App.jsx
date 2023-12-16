@@ -33,10 +33,6 @@ import { auth } from './firebase/config'
 function App() {
   const [user, setUser]  = useState()
  
-
-
-  
-
   const loadingUser = user === undefined
 
 
@@ -48,7 +44,7 @@ function App() {
 
 
   if(loadingUser) {
-    return  <div class="logo"></div>
+    return  <div class="loading"></div>
   }
  
 

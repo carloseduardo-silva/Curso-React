@@ -309,6 +309,7 @@ a{
     align-items: center;
     justify-content: start;
     gap: 1.1em;
+    margin-left: 3px;
 }
 
 .shop_cardBtn input{

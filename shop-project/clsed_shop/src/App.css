@@ -12,7 +12,7 @@
     margin: 5px 10px;
 }
 
-.logo {
+.loading {
     position: absolute;
     top: 38%;
     left: 46%;
@@ -28,10 +28,10 @@
     border-radius:75%;
     border-top: 5px solid black;
   }
-  .logo:hover {
+  .loading:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
   }
-  .logo.react:hover {
+  .loading.react:hover {
     filter: drop-shadow(0 0 2em #61dafbaa);
   }
   
@@ -47,7 +47,7 @@
 
   @media (max-width: 600px) {
 
-    .logo{
+    .loading{
         top: 33%;
         left: 39%;
     }

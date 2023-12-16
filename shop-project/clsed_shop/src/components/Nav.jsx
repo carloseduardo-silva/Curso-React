@@ -348,9 +348,9 @@ useEffect(() =>{
               <div className={styles.shop_cardBtn}>
 
               <div class="quantity">    
-                        <button  style={{width:'31px'}}  onClick={() => removeItem(JSON.parse(data))}>-</button>
-                        <input style={{width:'24px'}} value={JSON.parse(data).amount}  class="quantity" id="quantity" min="0" name="quantity"  type="number"/>
-                        <button  style={{width:'31px'}}  onClick={() => addItem(JSON.parse(data))}>+</button>
+                        <button  style={{width:'29px'}}  onClick={() => removeItem(JSON.parse(data))}>-</button>
+                        <input style={{width:'22px'}} value={JSON.parse(data).amount}  class="quantity" id="quantity" min="0" name="quantity"  type="number"/>
+                        <button  style={{width:'29px'}}  onClick={() => addItem(JSON.parse(data))}>+</button>
                     </div>
 
                 <a onClick={() =>{excludeProduct(JSON.parse(data))}} > Retirar </a>
