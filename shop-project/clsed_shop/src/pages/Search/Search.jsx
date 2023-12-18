@@ -54,6 +54,33 @@ const Search = () => {
     setProductDatas(datas)
   })
 
+  //Events and Listeners from Image hover on products card
+  let urlBack = ''
+  let urlFront = ''
+  document.querySelectorAll('#productCard').forEach((card) =>{
+    card.addEventListener('mouseover', () =>{
+      datas.map((product) =>{
+        if(product.idProduct == card.dataset.id){
+          urlBack = product.CarrouselIMG['1']
+          return
+        }
+      })
+      card.querySelector('.cardImg').src = urlBack
+    })
+  })
+
+  document.querySelectorAll('#productCard').forEach((card) =>{
+    card.addEventListener('mouseout', () =>{
+      datas.map((product) =>{
+        if(product.idProduct == card.dataset.id){
+          urlFront = product.CarrouselIMG['0']
+          return
+        }
+      })
+      card.querySelector('.cardImg').src = urlFront
+    })
+  })
+
   //fn
   const togglePriceModalShow = () =>{
     if(priceModalShow){
@@ -127,7 +154,7 @@ const Search = () => {
   return (
     <>
         <Nav/>
-        {datas.length > 0 && <> <p className={styles.search}> Pesquisa por: "{search}" </p> </>}
+        { <p className={styles.search}> Pesquisa por: "{search}" </p> }
       <div className={styles.search_container}>
 
       {load && <div className={styles.loading}></div> }
@@ -253,16 +280,18 @@ const Search = () => {
 
         <div className={styles.card_container}>
         
-          {datas.length > 0 ? datas.map((data) =>(
-                    <Link to={`/products/${data.idProduct}`}>
-                    <div key={data.idProduct} className={styles.card}>
-
-                        <div className={styles.img_card}>
-                            <img src={data.URLimage} alt="camiseta" />
-                        </div>
-                        <p className={styles.data_name}> {data.name}</p>
-                        <p> R${data.price},00</p>
-                    </div>
+          {datas.length > 0 ? datas.map((product) =>(
+                   <Link to={`/products/${product.idProduct}`} className={styles.product_Card}  id='productCard' data-id={product.idProduct}>
+                   <div  key={product.idProduct}>
+                     <div>
+                       <img class="cardImg" src={product.URLimage} alt={product.name} />
+                     </div>
+                     <div>
+                       <p className={styles.data_name}>{product.name}</p>
+                       <p>R${product.price}.00</p>
+                     </div>
+                   
+                   </div>
                  </Link>
            )) : <h2 className={styles.NotFound_product}>Não foi encontrado nenhum produto!</h2>}
 

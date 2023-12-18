@@ -1,5 +1,5 @@
-import {Component, useEffect, useLayoutEffect, useState, useMemo} from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useState} from 'react'
+import { useParams, Link } from 'react-router-dom'
 
 
 //css
@@ -81,6 +81,35 @@ switch(section){
 
 //hook fetching datas
 const {datas, loading, error} = useFetchDatas('products', search)
+
+
+//Events and Listeners from Image hover on products card
+let urlBack = ''
+let urlFront = ''
+document.querySelectorAll('#productCard').forEach((card) =>{
+  card.addEventListener('mouseover', () =>{
+    datas.map((product) =>{
+      if(product.idProduct == card.dataset.id){
+         urlBack = product.CarrouselIMG['1']
+         return
+      }
+    })
+    card.querySelector('.cardImg').src = urlBack
+  })
+})
+
+document.querySelectorAll('#productCard').forEach((card) =>{
+  card.addEventListener('mouseout', () =>{
+    datas.map((product) =>{
+      if(product.idProduct == card.dataset.id){
+         urlFront = product.CarrouselIMG['0']
+         return
+      }
+    })
+    card.querySelector('.cardImg').src = urlFront
+  })
+})
+
 
 
 
@@ -292,16 +321,18 @@ const handleFilterPrice = (e) =>{
         <div className={styles.productsQuery_container}>
           {datas.length == 0 && <p>Carregando produtos...</p>}
           {datas.length > 0 &&  datas.map((product) =>(
-            <div className={styles.product_Card} key={product.idProduct}>
-              <div>
-                <img src={product.URLimage} alt={product.name} />
+            <Link to={`/products/${product.idProduct}`} className={styles.product_Card}  id='productCard' data-id={product.idProduct}>
+              <div  key={product.idProduct}>
+                <div>
+                  <img class="cardImg" src={product.URLimage} alt={product.name} />
+                </div>
+                <div>
+                  <p className={styles.data_name}>{product.name}</p>
+                  <p>R${product.price}.00</p>
+                </div>
+              
               </div>
-
-              <div>
-                <p className={styles.data_name}>{product.name}</p>
-                <p>R${product.price}.00</p>
-              </div>
-            </div>
+            </Link>
           ))}
 
         </div>

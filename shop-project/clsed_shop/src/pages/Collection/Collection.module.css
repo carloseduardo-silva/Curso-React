@@ -166,7 +166,7 @@
     gap: 7px;
     width: 75%;
     margin: 0 auto;
-    animation: filterPriceDeskTopNavSlide 600ms;
+    animation: opacityShow 600ms;
     
 }
 
@@ -221,7 +221,22 @@
     background-color:rgb(238, 238, 238);
     padding: 0.8em 1.2em 1em 1.2em;
     animation: productCardEntry 1s ;
+    border-radius: 5px;
     
+}
+
+
+
+.product_Card:hover{
+    background-color:rgb(228, 228, 228);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.533);
+    transform: scale(1.01);
+    transition: 200ms;
+}
+
+.product_Card img:hover{
+    transform: scale(1.02);
+    transition: 300ms;
 }
 
 
@@ -371,6 +386,8 @@
 }
 
 
+
+
 @keyframes productCardEntry {
     from{
         opacity: 0;
@@ -407,7 +424,7 @@
 }
 
 
-@keyframes filterPriceDeskTopNavSlide {
+@keyframes opacityShow {
     from{
         opacity: 0;
       
