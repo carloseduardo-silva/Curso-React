@@ -12,7 +12,8 @@ const Search = () => {
 
   const[load, setLoad] = useState([1])
   const[lastQuery, setLastQuery] = useState(null)
-  const[productDatas, setProductDatas] = useState(null)
+  const [shopDatas, setShopDatas] = useState([])
+  const [shopFilterDatas, setShopFilterDatas] = useState([])
   const [sizeModalShow, setSizeModalShow] = useState(false)
   const [orderModalShow, setOrderModalShow] = useState(false)
   const [priceModalShow, setPriceModalShow] = useState(false)
@@ -51,8 +52,18 @@ const Search = () => {
   useEffect(() => {
     
     setLoad(loading)
-    setProductDatas(datas)
+   
   })
+
+  //setting datas from hook
+  useEffect(() =>{
+    if(datas.length > 0 ){
+      setShopDatas(datas)
+    }
+  },[datas])
+
+
+  let arrayFilters = []
 
   //Events and Listeners from Image hover on products card
   let urlBack = ''
@@ -85,6 +96,7 @@ const Search = () => {
   const togglePriceModalShow = () =>{
     if(priceModalShow){
       setPriceModalShow(false)
+      setShopDatas(datas)
     } else{
       setPriceModalShow(true)
     }
@@ -93,6 +105,7 @@ const Search = () => {
   const toggleSizeModalShow = () =>{
     if(sizeModalShow){
       setSizeModalShow(false)
+      setShopDatas(datas)
     } else{
       setSizeModalShow(true)
     }
@@ -144,12 +157,60 @@ const Search = () => {
     }
   }
 
+    //function that add the size filters
+  const pushFilters = (filter) =>{
+    if(arrayFilters.includes(filter)){
+      if(arrayFilters.length == 1){
+        arrayFilters.pop()
+      }
+      else{
+        arrayFilters.map((size) =>{
+          if(size == filter){
+            arrayFilters.splice(arrayFilters.indexOf(size), 1)
+          }
+        })
+      }
+      
+    }else{
+      arrayFilters.push(filter)
+    }
+
+    let productsFilter = []
+
+    datas.forEach((product) =>{
+      if(product.sizes.includes(arrayFilters.join(','))){
+        productsFilter.push(product)
+      }
+    })
+    setShopFilterDatas(productsFilter)
+    
   
+  
+    
+  
+  }
+
+  //set the datas filtered
+  useEffect(() =>{
+
+    setShopDatas(shopFilterDatas)
+
+  },[shopFilterDatas])
+
+
   const handleFilterPrice = (e) =>{
     e.preventDefault()
-  //basear-se no useGraphGenerator refatorar para utilizar Chamadas assincronas de dados, diretamente pelas funções e nao pela chamada do Hook.
-    
-}
+    let producstFilter = []
+      datas.forEach((product) =>{
+        if(product.price > filterMinPrice && product.price < filterMaxPrice){
+          producstFilter.push(product)
+        }
+      })
+
+      setShopFilterDatas(producstFilter)
+
+  }
+
 
   return (
     <>
@@ -164,29 +225,29 @@ const Search = () => {
           <div onClick={() => toggleSizeModalShow()} className={styles.filter_Card}>
           <p>Tamanho</p>
           {!sizeModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {sizeModalShow &&<span class="material-symbols-outlined">expand_less</span>}</div>
+          {sizeModalShow &&<span class="material-symbols-outlined">close</span>}</div>
 
           {sizeModalShow &&  
           <form className={styles.filterCheck}>
               <label>
-                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="P/S" id="P/S" value="P/S" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="P/S" value="P/S" />
                 P/S
               </label>
               <label>
-                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="M" id="M" value="M" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="M" value="M" />
                 M
               </label>
               <label>
-                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="G/L" id="G/L" value="G/L" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="G/L" value="G/L" />
                 G/L
               </label>
               <label>
-                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="GG/XL" id="GG/XL" value="GG/XL" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="GG/XL" value="GG/XL" />
                 GG/XL
               </label>
 
               <label>
-                <input onChange={(e) =>{setFilterSizes(e.target.value)}} type="checkbox" name="XGG/XXL" id="XGG/XXL" value="XGG/XXL" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="XGG/XXL" value="XGG/XXL" />
                 XGG/XXL
               </label>
 
@@ -197,18 +258,18 @@ const Search = () => {
           <div onClick={() => togglePriceModalShow()} className={styles.filter_Card}>
             <p>Preço</p>
           {!priceModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {priceModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          {priceModalShow &&<span class="material-symbols-outlined">close</span>}
           </div>
 
           {priceModalShow &&  
-          <form  className={styles.filter_price}>
+          <form onSubmit={handleFilterPrice} className={styles.filter_price}>
             <label>R$<input value={filterMinPrice} onChange={(e) =>{setFilterMinPrice(e.target.value)}} placeholder='0' type="number" />  </label> 
 
               <h2>-</h2>
 
             <label> R$<input value={filterMaxPrice} onChange={(e) =>{setFilterMaxPrice(e.target.value)}} placeholder='349'  type="number" />  </label>
 
-              <button onSubmit={handleFilterPrice}> Filtrar</button>
+              <button > Filtrar</button>
 
           </form>}
 
@@ -216,18 +277,15 @@ const Search = () => {
           <div onClick={() => toggleOrderModalShow()} className={styles.filter_Card}>
             <p>Ordenar {filterOrderCounter &&`(${filterOrderCounter})`}</p>
           {!orderModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {orderModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          {orderModalShow &&<span class="material-symbols-outlined">close</span>}
           </div>
 
           {orderModalShow &&  
           <form className={styles.filterCheck}>
+           
             <label>
-              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Destaques" value="Destaques" />
-              Em Destaques
-            </label>
-            <label>
-              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Mais-Vendidos"  value="Mais-Vendidos"/>
-              Mais Vendidos
+              <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Relevância"  value="Relevância"/>
+              Relevância
             </label>
             <label>
               <input onChange={(e) => {setFilterOrder(e.target.value)}} type="radio" name="order" id="Alfabética" value="Alfabética" />
@@ -280,7 +338,7 @@ const Search = () => {
 
         <div className={styles.card_container}>
         
-          {datas.length > 0 ? datas.map((product) =>(
+          {shopDatas.length > 0 ? shopDatas.map((product) =>(
                    <Link to={`/products/${product.idProduct}`} className={styles.product_Card}  id='productCard' data-id={product.idProduct}>
                    <div  key={product.idProduct}>
                      <div>
@@ -297,6 +355,91 @@ const Search = () => {
 
            
         </div>
+          
+        {/*Mobile Filter modals */}
+
+        {sizeMobileModalShow &&  
+        <div className={styles.filterMobile_modal}>
+
+          <div className={styles.filter_Header}>
+            <h2>Tamanho</h2> 
+            <span onClick={() => toggleMobileSizeModalShow()}  class="material-symbols-outlined">close</span>
+          </div>
+
+            <form className={styles.filterCheck}>
+              <label>
+                <input type="checkbox" name="P/S" id="P/S" />
+                P/S
+              </label>
+              <label>
+                <input type="checkbox" name="M" id="M" />
+                M
+              </label>
+              <label>
+                <input type="checkbox" name="G/L" id="G/L" />
+                G/L
+              </label>
+              <label>
+                <input type="checkbox" name="GG/XL" id="GG/XL" />
+                GG/XL
+              </label>
+
+              <label>
+                <input type="checkbox" name="" id="XGG/XXL" />
+                XGG/XXL
+              </label>
+
+            
+          </form>
+        </div>}
+
+        {priceMobileModalShow && 
+        <div className={styles.filterMobile_modal}>
+
+            <div className={styles.filter_Header}>
+                <h2>Preço</h2> 
+                <span onClick={() => toggleMobilePriceModalShow()}  class="material-symbols-outlined">close</span>
+            </div>
+
+          <form  className={styles.filter_price}>
+            <label>R$<input placeholder='0' type="number" />  </label> 
+
+              <h2>-</h2>
+
+            <label> R$<input placeholder='349'  type="number" />  </label>
+
+          </form>
+        </div>}
+
+        {orderMobileModalShow &&  
+            <div className={styles.filterMobile_modal}>
+
+                <div className={styles.filter_Header}>
+                  <h2>Ordenar</h2> 
+                  <span onClick={() => toggleMobileOrderModalShow()} class="material-symbols-outlined">close</span>
+                </div>
+
+              <form className={styles.filterCheck}>
+        
+                <label>
+                  <input type="radio" name="order" id="Relevância" />
+                  Relevância
+                </label>
+                <label>
+                  <input type="radio" name="order" id="Alfabética" />
+                  Ordem Alfabética
+                </label>
+                <label>
+                  <input type="radio" name="order" id="Menor-preço" />
+                  Menor Preço
+                </label>
+
+                <label>
+                  <input type="radio" name="order" id="Maior-preço" />
+                  Maior Preço
+                </label>
+                </form>
+            </div>}
 
       </div>
     </>

@@ -83,6 +83,18 @@
     margin: 0em 0em 4em 0em;
 }
 
+.img_card:hover{
+    background-color:rgb(224, 224, 224);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.533);
+    transform: scale(1.01);
+    transition: 200ms;
+}
+
+.card_container img:hover{
+    transform: scale(1.02);
+    transition: 300ms;
+}
+
 .card{
     display: flex;
     flex-direction: column;
@@ -97,10 +109,10 @@
     border-radius: 10px;
 }
 
-.img_card:hover{
-    background-color: rgb(149, 149, 149);
-    border-radius: 3px;
+.img_card img{
+    width: 380px;
 }
+
 
 .card p{
     margin-bottom: 3px;
@@ -116,6 +128,8 @@ a{
     text-decoration: none;
     color: black;
 }
+
+
 
 
 @media (min-width:944px) {

@@ -21,7 +21,7 @@ const Cart = () => {
 
 const[shopDatas, setShopDatas] = useState(null)
 const [validateError, setValidateError] = useState(null)
-const[inputAmount, setInputAmount] = useState('')
+
 
 const { datas } = useGetLocalStorage()
 
@@ -39,13 +39,6 @@ useEffect(() =>{
   
   },[])
 
-  //exclude product
-  const excludeProduct = (data) =>{
-  
-    if( useExcludeLocalStorage(data.key)){
-     window.location.reload()
-    }
-   }
 
   //add a item from a product
   const addItem = (data) =>{

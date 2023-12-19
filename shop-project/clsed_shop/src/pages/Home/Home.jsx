@@ -61,6 +61,39 @@ const Home = () => {
         ])
         },[])
 
+
+    //Events and Listeners from Image hover on products card
+    
+    useEffect(() =>{
+        console.log('oi')
+        let urlBack = ''
+        let urlFront = ''
+    
+        document.querySelectorAll('#productCard').forEach((card) =>{
+        card.addEventListener('mouseover', () =>{
+            datas.map((product) =>{
+            if(product.idProduct == card.dataset.id){
+                urlBack = product.CarrouselIMG['1']
+                return
+            }
+            })
+            card.querySelector('.cardImg').src = urlBack
+        })
+        })
+    
+        document.querySelectorAll('#productCard').forEach((card) =>{
+        card.addEventListener('mouseout', () =>{
+            datas.map((product) =>{
+            if(product.idProduct == card.dataset.id){
+                urlFront = product.CarrouselIMG['0']
+                return
+            }
+            })
+            card.querySelector('.cardImg').src = urlFront
+        })
+        })
+    })
+
     
     function nextImage(){
     
@@ -112,10 +145,10 @@ const Home = () => {
             <div  className={styles.card_container}>
         
             {datas.map((data) =>(
-                <Link to={`/products/${data.idProduct}`}>  
+                <Link to={`/products/${data.idProduct}`}  id='productCard' data-id={data.idProduct}>  
                 <div key={data.idProduct} className={styles.card}>
                     <div className={styles.img_card}>
-                        <img src={data.URLimage} alt="camiseta" />
+                        <img class='cardImg' src={data.URLimage} alt="camiseta" />
                     </div>
                     <p className={styles.data_name}> {data.name}</p>
                     <p> R${data.price},00</p>

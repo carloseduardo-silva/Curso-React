@@ -93,7 +93,7 @@
   align-items: center;
   justify-content: flex-start;
   gap:25px;
-  padding: 2em 2em 1.3em 0em;
+  padding: 2em 2em 2em 0em;
   font-size: 18px;
   margin-left: 25px;
   
@@ -199,7 +199,7 @@
 }
 
 .search{
-  margin: 7.5em 0px 21px 2em;
+  margin: 7.5em 0px 17px 2em;
   font-weight: bolder;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
@@ -292,7 +292,7 @@ a{
 
   .NotFound_product{
     margin: auto;
-    animation: notFound 3.5s;
+    animation: notFoundMobile 3s;
   }
   
 
@@ -320,6 +320,18 @@ a{
     }
     
   }
+
+  @keyframes notFoundMobile {
+    from{
+        
+        opacity: 0;
+    }
+    to{
+        opacity: 0.3;
+    }
+    
+  }
+
 
   @keyframes logo-spin {
     from {
@@ -433,18 +445,18 @@ a{
     
   }
   
-  @media (min-width:1000px){
+  @media (min-width:1090px){
       
-      .card_container{
-        justify-content: flex-start;
-        padding: 0em 0em 2em 0em;
-      }
+    .card_container{
+      justify-content: flex-start;
+      padding: 0em 0em 2em 0em;
+    }
 
-      .search_container{
-        flex-direction: row;
-        align-items: flex-start;
-        margin-bottom:7em;
-      }
+    .search_container{
+      flex-direction: row;
+      align-items: flex-start;
+      margin-bottom:7em;
+    }
 
 
     .filterMobile_modal{
@@ -506,6 +518,11 @@ a{
 
   .product_Card{
       width: calc(1/3 * 70%);
+  }
+
+  .NotFound_product{
+    margin: auto;
+    animation: notFound 3.5s;
   }
   }
 
