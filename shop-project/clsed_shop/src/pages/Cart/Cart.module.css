@@ -8,7 +8,7 @@
 }
 
 .cart_container h1 {
-    margin-bottom: 1em;
+    margin-bottom: 1.85em;
     font-weight:500;
     text-align: center;
     color: black;
@@ -168,7 +168,6 @@
 
 
 
-
 @media (max-width: 660px) {
 
     .cart_container{
@@ -213,6 +212,15 @@
     padding: 1.1em 1.8em;
     font-size: 15px;
    }
+
+   .paymentInfo_card h3{
+    font-size: 1.45em;
+   }
+
+   .paymentInfo_card p{
+    font-size: 1em;
+   }
+
 }
 
 
@@ -238,6 +246,13 @@
 }
 
 }
+
+@media (max-width:390px) {
+    .product_info{
+        font-size: 13.2px;
+    }
+}
+
 
 
 @media (min-width:944px) {

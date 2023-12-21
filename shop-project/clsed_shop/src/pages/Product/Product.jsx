@@ -167,7 +167,7 @@ const Product = () => {
 
     function nextImage(){
       setCarrouselShow(true)
-      setDirection("right");
+      setDirection("left");
       setCurrentIndex((prevIndex) =>
       prevIndex + 1 === imagesArr.length ? 0 : prevIndex + 1
     );
@@ -175,7 +175,7 @@ const Product = () => {
 
     function previousImage(){
       setCarrouselShow(true)
-      setDirection("left");
+      setDirection("right");
       setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? imagesArr.length - 1 : prevIndex - 1
     );}

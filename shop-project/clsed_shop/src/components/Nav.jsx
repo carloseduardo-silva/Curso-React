@@ -46,10 +46,10 @@ const Nav = () => {
 
     if(inputShow){
       const body = document.querySelector('body')
-      body.classList.toggle('transparent2')
+      body.classList.toggle('transparent')
     } else{
       const body = document.querySelector('body')
-      body.classList.remove('transparent2')
+      body.classList.remove('transparent')
       
 
     }
@@ -58,20 +58,6 @@ const Nav = () => {
  
  
   
-  /* useEffect(() =>{
-    let collections = document.querySelectorAll('nav ul a ')
-  
-    let collectionsArr = Array.prototype.slice.call(collections)
-
-    console.log(collections)
-    console.log(collectionsArr)
-    
-    collectionsArr.map((collection) => {
-      collection.addEve
-    })
-
-  }) */
-
 
 
   //signOut

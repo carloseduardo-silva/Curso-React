@@ -14,6 +14,7 @@ const Search = () => {
   const[lastQuery, setLastQuery] = useState(null)
   const [shopDatas, setShopDatas] = useState([])
   const [shopFilterDatas, setShopFilterDatas] = useState([])
+  const [filterMobileOn, setFilterMobileOn] = useState(null)
   const [sizeModalShow, setSizeModalShow] = useState(false)
   const [orderModalShow, setOrderModalShow] = useState(false)
   const [priceModalShow, setPriceModalShow] = useState(false)
@@ -21,7 +22,7 @@ const Search = () => {
   const [orderMobileModalShow, setMobileOrderModalShow] = useState(false)
   const [priceMobileModalShow, setMobilePriceModalShow] = useState(false)
   const [filterOrderCounter, setFilterOrderCounter] = useState(null)
-  const [filterSizes, setFilterSizes] = useState(null)
+ 
   const [filterMinPrice, setFilterMinPrice] = useState(0)
   const [filterMaxPrice, setFilterMaxPrice] = useState(349)
 
@@ -134,12 +135,13 @@ const Search = () => {
   }
   
   const toggleMobileSizeModalShow = () =>{
+    const body = document.querySelector('body')
     if(sizeMobileModalShow){
-      const body = document.querySelector('body')
+     
       body.classList.remove('transparent2')
       setMobileSizeModalShow(false)
     } else{
-      const body = document.querySelector('body')
+     
       body.classList.toggle('transparent2')
       setMobileSizeModalShow(true)
     }
@@ -157,7 +159,12 @@ const Search = () => {
     }
   }
 
-    //function that add the size filters
+  const excludeFilter = () =>{
+    setFilterMobileOn(null)
+    setShopDatas(datas)
+  }
+
+  //function that add the size filters
   const pushFilters = (filter) =>{
     if(arrayFilters.includes(filter)){
       if(arrayFilters.length == 1){
@@ -175,6 +182,7 @@ const Search = () => {
       arrayFilters.push(filter)
     }
 
+    
     let productsFilter = []
 
     datas.forEach((product) =>{
@@ -182,6 +190,7 @@ const Search = () => {
         productsFilter.push(product)
       }
     })
+    setFilterMobileOn(filter)
     setShopFilterDatas(productsFilter)
     
   
@@ -311,7 +320,7 @@ const Search = () => {
           <div onClick={() => toggleMobileSizeModalShow()} className={styles.filter_Card}>
           <p>Tamanho</p>
           {!sizeMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {sizeMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}</div>
+          {sizeMobileModalShow &&<span class="material-symbols-outlined">close</span>}</div>
 
 
 
@@ -319,7 +328,7 @@ const Search = () => {
           <div onClick={() => toggleMobilePriceModalShow()} className={styles.filter_Card}>
             <p>Preço</p>
           {!priceMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {priceMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          {priceMobileModalShow &&<span class="material-symbols-outlined">close</span>}
           </div>
 
 
@@ -328,12 +337,17 @@ const Search = () => {
           <div onClick={() => toggleMobileOrderModalShow()} className={styles.filter_Card}>
             <p>Ordenar</p>
           {!orderMobileModalShow &&<span class="material-symbols-outlined expand">expand_more</span>}
-          {orderMobileModalShow &&<span class="material-symbols-outlined">expand_less</span>}
+          {orderMobileModalShow &&<span class="material-symbols-outlined">close</span>}
           </div>
 
 
         </div>
-
+        
+        {filterMobileOn && 
+        <div onClick={excludeFilter} className={styles.filterOn}> <p>Tamanho: {filterMobileOn}</p>
+        <span class="material-symbols-outlined">close</span>
+        </div>
+        }
        
 
         <div className={styles.card_container}>
@@ -361,36 +375,36 @@ const Search = () => {
         {sizeMobileModalShow &&  
         <div className={styles.filterMobile_modal}>
 
-          <div className={styles.filter_Header}>
+          <div  className={styles.filter_Header}>
             <h2>Tamanho</h2> 
             <span onClick={() => toggleMobileSizeModalShow()}  class="material-symbols-outlined">close</span>
           </div>
 
             <form className={styles.filterCheck}>
               <label>
-                <input type="checkbox" name="P/S" id="P/S" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="P/S"  value="P/S"/>
                 P/S
               </label>
               <label>
-                <input type="checkbox" name="M" id="M" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="M" value="M" />
                 M
               </label>
               <label>
-                <input type="checkbox" name="G/L" id="G/L" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="G/L"  value="G/L"/>
                 G/L
               </label>
               <label>
-                <input type="checkbox" name="GG/XL" id="GG/XL" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="GG/XL" value="GG/XL" />
                 GG/XL
               </label>
 
               <label>
-                <input type="checkbox" name="" id="XGG/XXL" />
+                <input onChange={(e) =>{pushFilters(e.target.value)}} type="radio" name="size" id="XGG/XXL" value="XGG/XXL" />
                 XGG/XXL
               </label>
 
             
-          </form>
+            </form>
         </div>}
 
         {priceMobileModalShow && 
@@ -401,13 +415,14 @@ const Search = () => {
                 <span onClick={() => toggleMobilePriceModalShow()}  class="material-symbols-outlined">close</span>
             </div>
 
-          <form  className={styles.filter_price}>
-            <label>R$<input placeholder='0' type="number" />  </label> 
+          <form onSubmit={handleFilterPrice}  className={styles.filter_price}>
+            <label>R$ <input value={filterMinPrice} onChange={(e) =>{setFilterMinPrice(e.target.value)}} placeholder='0' type="number" />  </label> 
 
               <h2>-</h2>
 
-            <label> R$<input placeholder='349'  type="number" />  </label>
+            <label> R$ <input value={filterMaxPrice} onChange={(e) =>{setFilterMaxPrice(e.target.value)}} placeholder='349'  type="number" />  </label>
 
+            <button> Filtrar </button>
           </form>
         </div>}
 

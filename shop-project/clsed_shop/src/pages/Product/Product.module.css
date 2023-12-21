@@ -135,6 +135,13 @@
     
 }
 
+@media (max-width:440px) {
+    .img_container{
+        height: 70vh;
+    }
+    
+}
+
 
 
 

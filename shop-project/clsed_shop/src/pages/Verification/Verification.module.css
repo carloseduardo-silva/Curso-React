@@ -9,6 +9,7 @@
 
 .title_mobile{
     color: white;
+    padding: 0.85em 0em;
 }
 
 .ShopSumaryDesktop_container{
@@ -156,7 +157,7 @@
  }
 
  .clientInfo_container h1{
-   
+
     margin: 0.6em 0.5em;
  }
 
@@ -267,45 +268,44 @@
 
 
 
-@media (max-width:470px) {
-    .subtotal{
-        font-size: 19px;
-    }
-    .summayExibition{
-        font-size: 15px;
-    }
-    .product_info{
-        font-size: 13px;
-        
-    }
-
-    .cart_products{
-       align-items: center;
-       margin-bottom: 1.75em;
-    }
-
-    .product_2{
-        font-size: 17px;
-        display: none;
-    }
-
-    input{
-        width: 96%;
-    }
-
-    select{
-        width: 99%;
-    }
-
-    .cart_subtotal{
-        align-items: center;
-    }
-
-   
-    
+ @media (max-width:470px) {
+.subtotal{
+font-size: 19px;
 }
- 
+.summayExibition{
+font-size: 15px;
+}
+.product_info{
+font-size: 13px;
 
+}
+
+.cart_products{
+align-items: center;
+margin-bottom: 1.75em;
+}
+
+.product_2{
+font-size: 17px;
+display: none;
+}
+
+input{
+width: 96%;
+}
+
+select{
+width: 99%;
+}
+
+.cart_subtotal{
+align-items: center;
+}
+
+
+
+ }
+ 
  @media (min-width: 700px) {
     
     .clientInfo_container{
@@ -352,6 +352,8 @@
     .clientInfo_container{
         padding: 1.2em 1em 1.2em 1em;
     }
+
+ 
 
     .clientInfo_container form{
         width: 85%;
