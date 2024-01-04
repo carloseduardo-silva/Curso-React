@@ -169,7 +169,7 @@ useEffect(() =>{
         <nav className={styles.desktop_nav}>
 
               {user && 
-              <Link class='menu-hamburguer'><span style={{color:'white', fontSize:'1em' }} onClick={() =>(toggleModal())}  className="material-symbols-outlined menu-hamburguer">menu</span></Link>
+              <Link class='menu-hamburguer'><span style={{ fontSize:'1em' }} onClick={() =>(toggleModal())}  className="material-symbols-outlined menu-hamburguer">menu</span></Link>
               }
             
             <div className={styles.utilities}>
@@ -191,7 +191,7 @@ useEffect(() =>{
 
 
             <Link to={'/'}>
-              <div style={{color:'white'}} className={styles.logo}>CL <span>SED</span></div>
+              <div className={styles.logo}>CL <span>SED</span></div>
             </Link>
 
             <div className={styles.container_icons}>

@@ -56,7 +56,6 @@ const Home = () => {
         setImagesArr(['https://cdn.vox-cdn.com/thumbor/Gzz0B3GqZRXvAqphlWA5pUifZGM=/88x0:1509x1066/1200x675/filters:focal(88x0:1509x1066)/cdn.vox-cdn.com/uploads/chorus_image/image/50128435/wmns9.0.0.jpg',
         "https://uncoverla.sfo3.digitaloceanspaces.com/wp-content/uploads/2019/10/29125942/fred-segal-stadium-goods-pop-up-west-hollywood_2019_10_02-scaled.jpg",
         "https://images.the500hiddensecrets.com/2019-03/new_york-shop-kith.jpg?auto=format&fit=max&h=1080&ixlib=php-1.1.0&q=65&w=1920&s=1e89fe8a766debb0395ac9625bcbacfa",
-        "https://images.the500hiddensecrets.com/2023-05/new_york-shop-only_ny.jpg?auto=format&fit=max&h=1080&ixlib=php-1.1.0&q=65&w=1920&s=608e2324e90965c2f29e852a8f71b9c1",
         "https://images.405magazine.com/wp-content/uploads/2022/02/img-5630-scaled-1.jpg"
         ])
         },[])
@@ -65,7 +64,7 @@ const Home = () => {
     //Events and Listeners from Image hover on products card
     
     useEffect(() =>{
-        console.log('oi')
+        
         let urlBack = ''
         let urlFront = ''
     
@@ -133,7 +132,11 @@ const Home = () => {
                 src={imagesArr[currentIndex]} alt="camiseta" /> 
             </AnimatePresence>
 
-            <Link to={'/collection/all'} className={styles.show_more}> Ver Produtos</Link>
+            <div className={styles.title}>
+                <p>WELCOME TO CLSEED SHOP</p>
+                <h1> CLSEED SHOP NEW COLLECTION 2024</h1>
+                <Link to={'/collection/all'} className={styles.show_more}> Ver Produtos</Link>
+            </div>
 
             <span onClick={() => nextImage()} class="material-symbols-outlined forward">arrow_forward</span>
 

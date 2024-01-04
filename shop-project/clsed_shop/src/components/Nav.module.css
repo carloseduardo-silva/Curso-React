@@ -10,11 +10,12 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    background-color: rgb(24, 24, 24);
+    background-color: rgb(239, 239, 239);
     align-items: center;
-    color: white;
-    padding: 0.50em;
+    color: rgb(0, 0, 0);
+    padding: 0.55em;
     font-size: 2.3em;
+    font-family: 'Schibsted Grotesk', sans-serif;
 
 
 }
@@ -28,8 +29,9 @@
 }
 
 .logo span{
-    color: rgb(203, 201, 201);
+    color: rgb(0, 0, 0);
     margin-left: -6.5px;
+    font-weight: bold;
     
 }
 .logo{
@@ -55,7 +57,7 @@
 }
 
 .container_icons button{
-    color: white;
+    color: rgb(210, 210, 210);
     margin: 2px 15px 0px 15px;
     font-size: 1em;
     background-color: transparent;
@@ -71,7 +73,7 @@
 }
 
 .container_icons span{
-    color: white;
+    color: rgb(0, 0, 0);
     margin: 2px 17px 0px 17px;
     font-size: 0.85em;
 
@@ -89,9 +91,9 @@ input.query{
 
 
 input.mobileQuery{
-    background-color: rgba(0, 0, 0, 0.704);
+    background-color: rgba(211, 211, 211, 0.704);
     border-radius: 8px;
-    color: rgb(217, 217, 217);
+    color: rgb(9, 9, 9);
     border: grey;
     width: 30vw;
     padding: 1.55em 16px;
@@ -102,20 +104,23 @@ input.mobileQuery{
 }
 
 input.mobileQuery::placeholder{
-    color: rgb(151, 151, 151);
+    color: rgb(70, 70, 70);
     font-size: 1em;
 }
 
 a{
     display: flex;
 }
+h4{
+    color: black;
+}
 
 
 
 .mobile_nav{
     display: flex;
-    background-color: rgb(24, 24, 24);
-    color: white;
+    background-color: rgb(239, 239, 239);
+    color: rgb(0, 0, 0);
     justify-content: start;
     align-items: center;
     flex-direction: column;
@@ -143,7 +148,7 @@ a{
 }
 
 .navMobile_header span{
-    color: rgb(156, 156, 156);
+    color: rgb(100,100,100);
 }
 
 .navMobile_header form{
@@ -153,7 +158,7 @@ a{
 
 .navMobile_header button{
     background-color: transparent;
-    color: rgb(156, 156, 156);
+    color: rgb(100,100,100);
     border: none;
     display: inline-flex;
     margin-left: -1.5em;
@@ -184,7 +189,7 @@ a{
 }
 
 .navMobile_card:hover{
-    color: rgb(156, 156, 156);
+    color: rgb(100,100,100);
     transition: 250ms;
     cursor: pointer;
 }
@@ -212,7 +217,7 @@ a{
 
 .utilities_Nav ul a{
     padding: 1em 2px;
-    color: white;
+    color: rgb(0, 0, 0);
     animation: NavUtilitiesSlide 750ms ;
 }
 
@@ -229,8 +234,8 @@ a{
 
 .mobile_navShop{
     display: flex;
-    background-color: rgb(24, 24, 24);
-    color: white;
+    background-color: rgb(239, 239, 239);
+    color: rgb(0, 0, 0);
     justify-content: start;
     align-items: center;
     flex-direction: column;
@@ -258,14 +263,14 @@ a{
 }
 
 .shop_header span{
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 1.5em;
 }
 
 .shop_itens{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     overflow-y: scroll;
     width: 98%;
@@ -276,7 +281,7 @@ a{
 .shop_itens::-webkit-scrollbar{
     background-color: transparent;
     border-radius: 10px;
-    color: white;
+    color: rgb(0, 0, 0);
     width: 10px;
     height: 10px;
 }
@@ -285,10 +290,10 @@ a{
     display: flex;
     justify-content: start;
     flex-direction: column;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgb(0, 0, 0);
     padding-bottom: 12px;
     margin: 10px 0px;
-  
+    width: 100%;
 
 
 }
@@ -319,7 +324,7 @@ a{
 }
 
 .shop_cardBtn a{
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: underline;
 }
 
@@ -363,8 +368,8 @@ a{
 
 .shop_summary button{
     font-size: 14px;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
+    color: rgb(236, 236, 236);
+    background-color: rgb(9, 9, 9);
     padding: 1.05em 2.35em;
     border-radius: 18px;
     border: black;
@@ -372,10 +377,11 @@ a{
 }
 
 .shop_summary button:hover{
-    background-color: rgb(59, 59, 59);
-    color: white;
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
     transition: 250ms;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 
@@ -453,6 +459,7 @@ a{
         align-items: center;
         justify-content: center;
         gap: 3px;
+        font-weight: 650;
         
     
     }
@@ -471,8 +478,8 @@ a{
 
     .utilities_modal{
         display: flex;
-        background-color: rgb(24, 24, 24);
-        color: white;
+        background-color: rgb(239, 239, 239);
+        color: rgb(0, 0, 0);
         justify-content: start;
         align-items: center;
         flex-direction: column;
@@ -484,6 +491,7 @@ a{
         text-align: center;
         padding: 0em 1.5em 1em 2.5em;
         margin: 8.2em 3em 3em 5em;
+        border-radius: 3px;
 
     }
 
@@ -498,7 +506,7 @@ a{
     }
 
     .utilities_modal a li {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     .utilities_modal a li:hover{
@@ -520,9 +528,9 @@ a{
     
     input.query{
         display: flex;
-        background-color: rgba(0, 0, 0, 0.704);
+        background-color: rgba(211, 211, 211, 0.704);
         border-radius: 8px;
-        color: rgb(217, 217, 217);
+        color: rgb(9, 9, 9);
         border: grey;
         width: 50vw;
         padding: 0.52em 16px;
@@ -534,7 +542,7 @@ a{
     }
     
     input.query::placeholder{
-        color: rgb(151, 151, 151);
+        color: rgb(70, 70, 70);
         font-size: 1em;
     }
 
