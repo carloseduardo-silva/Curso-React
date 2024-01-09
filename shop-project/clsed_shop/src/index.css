@@ -104,7 +104,7 @@ footer {
     display: none;
   }
   .login{
-    padding-left: 2.25em;
+    padding-left: 3.85em;
   }
   body.transparent::after {
     content: "";

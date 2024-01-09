@@ -13,7 +13,7 @@ import { useTotalValueShop }  from '../hooks/useTotalValueShop'
 import { useAddItem } from '../hooks/useAddItem'
 import { useRemoveItem } from '../hooks/useRemoveItem'
 import { useToLocalStorage } from '../hooks/useToLocalStorage'
-import { useFetchDatas } from '../hooks/useFetchDatas'
+
 
 
 
@@ -38,6 +38,7 @@ const Nav = () => {
 
   //get the datas from localstorage, to show in shoppingCart
   const { datas } = useGetLocalStorage()
+
   //sum the price of the products that the clients selected
   const {totalValue} = useTotalValueShop(datas)
 
@@ -73,8 +74,6 @@ const Nav = () => {
   const handleQuery = (e) =>{
     e.preventDefault()
     if(productQuery){
-    
-     
      return Navigate(`/search?q=${productQuery.toLowerCase()}`)
     }else{
       setinputShow(false)
@@ -98,70 +97,72 @@ const Nav = () => {
     } else{
       setnavShopShow(true)
     }
-}
-//utilities desktop modal
-const toggleUtilitiesModal = () =>{
-  if(utilitiesModalShow){
-    setUtilitiesModalShow(false)
-  } else{
-    setUtilitiesModalShow(true)
   }
-}
-//utilitites mobile nav
-const toggleUtilitiesNavMobile = () =>{
-  if(utilitiesNavShow){
-    setUtilitiesNavShow(false)
-  } else{
-    setUtilitiesNavShow(true)
+  //utilities desktop modal
+  const toggleUtilitiesModal = () =>{
+    if(utilitiesModalShow){
+      setUtilitiesModalShow(false)
+    } else{
+      setUtilitiesModalShow(true)
+    }
   }
-}
 
-const excludeProduct = (data) =>{
-  
- if( useExcludeLocalStorage(data.key)){
-  window.location.reload()
- }
-}
-
-//add item of a product
-const addItem = (data) =>{
-  let newAmount = data.amount + 1
-  
-  const {productData} = useAddItem(data, newAmount)
-  
-  useToLocalStorage(productData, productData.key)
-  window.location.reload()
- 
-}
-
-//remove item of a product
-const removeItem = (data) =>{
-
-  if(data.amount == 1){
-      return
+  //utilitites mobile nav
+  const toggleUtilitiesNavMobile = () =>{
+    if(utilitiesNavShow){
+      setUtilitiesNavShow(false)
+    } else{
+      setUtilitiesNavShow(true)
+    }
   }
-  else{
-      let newAmount = data.amount - 1
+
+  //exclude product from the cart
+  const excludeProduct = (data) =>{
+    
+  if( useExcludeLocalStorage(data.key)){
+    window.location.reload()
+  }
+  }
+
+  //add item of a product
+  const addItem = (data) =>{
+    let newAmount = data.amount + 1
+    
+    const {productData} = useAddItem(data, newAmount)
+    
+    useToLocalStorage(productData, productData.key)
+    window.location.reload()
   
-      const {productData} = useRemoveItem(data, newAmount)
+  }
+
+  //remove item of a product
+  const removeItem = (data) =>{
+
+    if(data.amount == 1){
+        return
+    }
+    else{
+        let newAmount = data.amount - 1
+    
+        const {productData} = useRemoveItem(data, newAmount)
+        
+        useToLocalStorage(productData, productData.key)
+        window.location.reload()
       
-      useToLocalStorage(productData, productData.key)
-      window.location.reload()
-     
+    }
+
   }
 
-}
 
+  useEffect(() =>{
+  
+    if( datas.length == 0 ) {
+      console.log('nao há items adicionados ao carrinho')
+    }else{
+      setShopDatas(datas)
+    }
 
-useEffect(() =>{
- 
-  if( datas.length == 0 ) {
-    console.log('nao há items adicionados ao carrinho')
-  }else{
-    setShopDatas(datas)
-  }
-
-},[])
+  },[])
 
   return (
     <div className={styles.container_nav}>
@@ -195,9 +196,6 @@ useEffect(() =>{
             </Link>
 
             <div className={styles.container_icons}>
-
-
-
 
             {/* no user authenticated */}
             {!user &&   <Link to={'/login'}><span className="material-symbols-outlined login">account_circle</span></Link> }
@@ -361,6 +359,9 @@ useEffect(() =>{
 
         </nav>
       }
+      
+      {/* Escape area for Cart */}
+      {navShopShow && <div onClick={toggleShopModal} className={styles.cartEscapeArea}></div>}
       
     </div>
   )

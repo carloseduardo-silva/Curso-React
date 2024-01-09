@@ -55,7 +55,12 @@
 .form_container a{
     text-decoration: underline;
     margin: 0 auto;
-    color:  blue;
+    color:  rgb(88, 88, 88);
+ 
+}
+
+.form_container a:hover{
+    color: rgb(188, 188, 188);
 }
 
 h1{
