@@ -179,10 +179,6 @@
         gap: 4em;
     }
 
-    .card_product{
-        flex-direction: column;
-    }
-
     .product_1{
         align-items: start;
     }
@@ -193,7 +189,7 @@
     }
 
     .product_2{
-        margin: -3em 0em 0em 1.15em;
+        margin: -3em 1em 0em 0em;
     }
 
     .product_2 .product_price{
@@ -233,7 +229,7 @@
 }
 
 .product_info{
-    font-size: 14.25px;
+    font-size: 15.25px;
     margin-right: 1em;
 }
 .product_1 img{

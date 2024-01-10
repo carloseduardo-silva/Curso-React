@@ -27,18 +27,18 @@ const { datas } = useGetLocalStorage()
 
 const {totalValue} = useTotalValueShop(datas)
 
-useEffect(() =>{
-    
-    //first item
-    if( datas.length == 0 ) {
+  //setting datas as shopDatas to be listed on the cart
+  useEffect(() =>{
       
-      setValidateError('nao há items adicionados ao carrinho')
-    }else{
-      setShopDatas(datas)
-    }
-  
-  },[])
-
+      //first item
+      if( datas.length == 0 ) {
+        
+        setValidateError('nao há items adicionados ao carrinho')
+      }else{
+        setShopDatas(datas)
+      }
+    
+    },[])
 
   //add a item from a product
   const addItem = (data) =>{
